@@ -88,9 +88,12 @@ def get_transformed_file(data):
     """
     transforms = getToolByName(getSite(), 'portal_transforms')
 
+    if transforms._findPath(data.contentType, 'text/plain'):
+        return ''
+
     try:
         return transforms.convertTo(
-            'test/plain', data.data, mimetype=data.contentType,
+            'text/plain', data.data, mimetype=data.contentType,
             filename=data.filename)
     except (ConflictError, KeyboardInterrupt):
         raise
