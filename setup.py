@@ -27,6 +27,9 @@ setup(name='collective.dexteritytextindexer',
       install_requires=[
         'setuptools',
         'five.grok',
+        'plone.indexer',
+        'plone.behavior',
+        'zope.interface',
         ],
       entry_points="""
       # -*- Entry points: -*-
