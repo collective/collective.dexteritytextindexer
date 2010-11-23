@@ -27,16 +27,20 @@ In your *profiles/default/types/YOURTYPE.xml* add the behavior::
 
 
 Now you need to mark the fields you wan't to have in your SearchableText. This
-is done with directives::
+is done with directives:
 
     >>> from collective.dexteritytextindexer.directives import searchable
+    >>> from plone.autoform.interfaces import IFormFieldProvider
     >>> from plone.directives import form
     >>> from zope import schema
+    >>> from zope.interface import alsoProvides
     >>>
     >>> class IMyBehavior(form.Schema):
     ...
     ...     searchable('specialfield')
     ...     specialfield = schema.TextField(title=u'Special field')
+    ...
+    >>> alsoProvides(IMyBehavior, IFormFieldProvider)
 
 Don't forget to grok your package in your ``configure.zcml``::
 

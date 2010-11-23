@@ -12,9 +12,10 @@ class searchable(martian.Directive):
     """
 
     scope = martian.CLASS
-    store = FormMetadataListStorage
+    store = FormMetadataListStorage()
 
     key = SEARCHABLE_KEY
+    value = 'true'
 
     def factory(self, *args):
         if not args:

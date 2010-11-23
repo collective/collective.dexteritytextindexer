@@ -2,6 +2,10 @@ from setuptools import setup, find_packages
 import os
 
 version = '1.0a1'
+tests_require = [
+    'zope.testing',
+    'zope.schema',
+    ]
 
 setup(name='collective.dexteritytextindexer',
       version=version,
@@ -30,7 +34,10 @@ setup(name='collective.dexteritytextindexer',
         'plone.indexer',
         'plone.behavior',
         'zope.interface',
+        'plone.directives.form',
         ],
+      tests_require=tests_require,
+      extras_require=dict(tests=tests_require),
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]
