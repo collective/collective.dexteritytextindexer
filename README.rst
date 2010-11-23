@@ -38,7 +38,7 @@ is done with directives::
     ...     searchable('specialfield')
     ...     specialfield = schema.TextField(title=u'Special field')
 
-Don't forget to grok your package in your ``configure.zcml``:
+Don't forget to grok your package in your ``configure.zcml``::
 
     <configure xmlns="http://namespaces.zope.org/zope"
                xmlns:grok="http://namespaces.zope.org/grok">
