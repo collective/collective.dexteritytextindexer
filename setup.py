@@ -5,6 +5,7 @@ version = '1.0a1'
 tests_require = [
     'zope.testing',
     'zope.schema',
+    'plone.app.testing',
     ]
 
 setup(name='collective.dexteritytextindexer',
@@ -36,6 +37,7 @@ setup(name='collective.dexteritytextindexer',
         'zope.interface',
         'plone.directives.form',
         'plone.dexterity',
+        'plone.namedfile',
         ],
       tests_require=tests_require,
       extras_require=dict(tests=tests_require),

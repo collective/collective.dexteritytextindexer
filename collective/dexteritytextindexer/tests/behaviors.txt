@@ -1,0 +1,154 @@
+Test everything with behaviors
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> from grokcore.component.testing import grok_component
+    >>> from plone.app.testing import TEST_USER_NAME
+    >>> from plone.app.testing import login
+    >>> from plone.dexterity.fti import DexterityFTI
+    >>> from plone.dexterity.utils import createContentInContainer
+
+    >>> portal = layer['portal']
+    >>> login(portal, TEST_USER_NAME)
+
+
+Helpers:
+
+    >>> def obj2brain(obj):
+    ...     catalog = getToolByName(obj, 'portal_catalog')
+    ...     query = {'path': {'query': '/'.join(obj.getPhysicalPath()),
+    ...                       'depth': 0}}
+    ...     brains = catalog(query)
+    ...     if len(brains) == 0:
+    ...         raise Exception('Not in catalog: %s' % obj)
+    ...     else:
+    ...         return brains[0]
+
+    >>> def getSearchableText(obj):
+    ...     brain = obj2brain(obj)
+    ...     catalog = getToolByName(obj, 'portal_catalog')
+    ...     data = catalog.getIndexDataForRID(brain.getRID())
+    ...     return data['SearchableText']
+
+
+First test it with a simple behavior:
+
+    >>> from collective.dexteritytextindexer.tests.behaviors import ISimpleBehavior
+    >>> grok_component('ISimpleBehavior', ISimpleBehavior)
+    True
+    >>> fti = DexterityFTI('SimpleFTI')
+    >>> fti.behaviors = (
+    ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
+    ...     'collective.dexteritytextindexer.tests.behaviors.ISimpleBehavior',
+    ... )
+    >>> portal.portal_types._setObject('SimpleFTI', fti)
+    'SimpleFTI'
+    >>> schema = fti.lookupSchema()
+
+    >>> obj1 = createContentInContainer(portal, 'SimpleFTI',
+    ...                                 checkContstraints=False,
+    ...                                 foo='foox',
+    ...                                 bar='barx')
+    >>> obj1
+    <Item at /plone/simplefti>
+    >>> getSearchableText(obj1)
+    ['foox']
+
+Does a list work?
+
+    >>> from collective.dexteritytextindexer.tests.behaviors import IListBehavior
+    >>> grok_component('IListBehavior', IListBehavior)
+    True
+    >>> fti = DexterityFTI('ListFTI')
+    >>> fti.behaviors = (
+    ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
+    ...     'collective.dexteritytextindexer.tests.behaviors.IListBehavior',
+    ... )
+    >>> portal.portal_types._setObject('ListFTI', fti)
+    'ListFTI'
+    >>> schema = fti.lookupSchema()
+
+    >>> obj2 = createContentInContainer(portal, 'ListFTI',
+    ...                                 checkContstraints=False,
+    ...                                 list_field=['hello', u'little', 'world'])
+
+    >>> obj2
+    <Item at /plone/listfti>
+    >>> getSearchableText(obj2)
+    ['hello', 'little', 'world']
+
+
+Do ints work?
+
+    >>> from collective.dexteritytextindexer.tests.behaviors import IIntBehavior
+    >>> grok_component('IIntBehavior', IIntBehavior)
+    True
+    >>> fti = DexterityFTI('IntFTI')
+    >>> fti.behaviors = (
+    ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
+    ...     'collective.dexteritytextindexer.tests.behaviors.IIntBehavior',
+    ... )
+    >>> portal.portal_types._setObject('IntFTI', fti)
+    'IntFTI'
+    >>> schema = fti.lookupSchema()
+
+    >>> obj3 = createContentInContainer(portal, 'IntFTI',
+    ...                                 checkContstraints=False,
+    ...                                 int_field=57)
+
+    >>> obj3
+    <Item at /plone/intfti>
+    >>> getSearchableText(obj3)
+    ['57']
+
+
+Do dicts work?
+
+    >>> from collective.dexteritytextindexer.tests.behaviors import IDictBehavior
+    >>> grok_component('IDictBehavior', IDictBehavior)
+    True
+    >>> fti = DexterityFTI('DictFTI')
+    >>> fti.behaviors = (
+    ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
+    ...     'collective.dexteritytextindexer.tests.behaviors.IDictBehavior',
+    ... )
+    >>> portal.portal_types._setObject('DictFTI', fti)
+    'DictFTI'
+    >>> schema = fti.lookupSchema()
+
+    >>> obj4 = createContentInContainer(portal, 'DictFTI',
+    ...                                 checkContstraints=False,
+    ...                                 dict_field=dict(foo=u'bar', blubb=u'bla'))
+
+    >>> obj4
+    <Item at /plone/dictfti>
+    >>> getSearchableText(obj4)
+    ['bar', 'bla']
+
+
+And everything together?
+
+    >>> fti = DexterityFTI('FatFTI')
+    >>> fti.behaviors = (
+    ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
+    ...     'collective.dexteritytextindexer.tests.behaviors.ISimpleBehavior',
+    ...     'collective.dexteritytextindexer.tests.behaviors.IListBehavior',
+    ...     'collective.dexteritytextindexer.tests.behaviors.IIntBehavior',
+    ...     'collective.dexteritytextindexer.tests.behaviors.IDictBehavior',
+    ... )
+    >>> portal.portal_types._setObject('FatFTI', fti)
+    'FatFTI'
+    >>> schema = fti.lookupSchema()
+
+    >>> obj5 = createContentInContainer(portal, 'FatFTI',
+    ...                                 checkContstraints=False,
+    ...                                 foo='foox',
+    ...                                 bar='barx',
+    ...                                 list_field=['hello', u'little', 'world'],
+    ...                                 int_field=57,
+    ...                                 dict_field=dict(foo=u'bar', blubb=u'bla'))
+
+    >>> obj5
+    <Item at /plone/fatfti>
+    >>> getSearchableText(obj5)
+    ['foox', 'hello', 'little', 'world', '57', 'bar', 'bla']
+

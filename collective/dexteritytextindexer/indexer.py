@@ -44,11 +44,20 @@ def dynamic_searchable_text_indexer(obj):
                         subval = subval.decode('utf-8')
                     indexed.append(subval)
 
+            elif isinstance(value, dict):
+                for subval in value.values():
+                    if isinstance(subval, unicode):
+                        subval = subval.decode('utf-8')
+                    indexed.append(subval)
+
             elif isinstance(value, unicode):
                 indexed.append(value.encode('utf-8'))
 
-            elif value:
+            elif isinstance(value, str):
                 indexed.append(value)
+
+            elif value:
+                indexed.append(str(value))
 
     for name, adapter in getAdapters((obj,), IDynamicTextIndexExtender):
         extended_value = adapter()
