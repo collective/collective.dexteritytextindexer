@@ -30,7 +30,7 @@ In your *profiles/default/types/YOURTYPE.xml* add the behavior::
 Now you need to mark the fields you wan't to have in your SearchableText. This
 is done with directives::
 
-    from collective.dexteritytextindexer.directives import searchable
+    from collective import dexteritytextindexer
     from plone.autoform.interfaces import IFormFieldProvider
     from plone.directives import form
     from zope import schema
@@ -38,7 +38,7 @@ is done with directives::
 
     class IMyBehavior(form.Schema):
 
-        searchable('specialfield')
+        dexteritytextindexer.searchable('specialfield')
         specialfield = schema.TextField(title=u'Special field')
 
     alsoProvides(IMyBehavior, IFormFieldProvider)
@@ -80,6 +80,7 @@ additional data::
         def __call__(self):
             """Extend the searchable text with a custom string"""
             return 'some more searchable words'
+
 
 This is a **named** adapter! This makes it possible to register multiple
 extenders for the same object on different behavior interfaces. The name of

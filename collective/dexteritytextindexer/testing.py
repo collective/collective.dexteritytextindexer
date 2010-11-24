@@ -1,4 +1,3 @@
-# from plone.app.testing import applyProfile
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
@@ -22,10 +21,7 @@ class TextIndexerLayer(PloneSandboxLayer):
                        context=configurationContext)
 
     def setUpPloneSite(self, portal):
-        # Install into Plone site using portal_setup
-        # applyProfile(portal, 'ftw.foo:default')
         setRoles(portal, TEST_USER_NAME, ['Manager'])
-
 
 
 TEXT_INDEXER_FIXTURE = TextIndexerLayer()
