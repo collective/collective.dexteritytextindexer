@@ -1,12 +1,12 @@
 exclude .installed.cfg
+exclude buildout.cfg
 global-exclude *.mo
 global-exclude *.pyc
 global-exclude .DS_Store
 global-exclude ._*
 include *.txt
-recursive-exclude bin/
-recursive-exclude buildout.cfg
-recursive-exclude develop-eggs/
-recursive-exclude parts/
+recursive-exclude bin *
+recursive-exclude develop-eggs *
+recursive-exclude parts *
 recursive-include collective *
 recursive-include docs *
