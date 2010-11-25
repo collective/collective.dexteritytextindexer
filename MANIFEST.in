@@ -4,6 +4,7 @@ global-exclude *.mo
 global-exclude *.pyc
 global-exclude .DS_Store
 global-exclude ._*
+include *.rst
 include *.txt
 recursive-exclude bin *
 recursive-exclude develop-eggs *
