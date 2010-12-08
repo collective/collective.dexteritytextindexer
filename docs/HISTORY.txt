@@ -4,7 +4,8 @@ Changelog
 
 1.0b3
 -----
-
+* fixed Bug UnicodeError:  while indexing lists  or dicts with special chars (Non-Ascii characters)
+  [phgross]
 
 
 1.0b2

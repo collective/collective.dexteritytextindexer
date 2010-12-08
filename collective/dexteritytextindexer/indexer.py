@@ -41,13 +41,13 @@ def dynamic_searchable_text_indexer(obj):
             if isinstance(value, tuple) or isinstance(value, list):
                 for subval in value:
                     if isinstance(subval, unicode):
-                        subval = subval.decode('utf-8')
+                        subval = subval.encode('utf-8')
                     indexed.append(subval)
 
             elif isinstance(value, dict):
                 for subval in value.values():
                     if isinstance(subval, unicode):
-                        subval = subval.decode('utf-8')
+                        subval = subval.encode('utf-8')
                     indexed.append(subval)
 
             elif isinstance(value, unicode):
@@ -59,7 +59,7 @@ def dynamic_searchable_text_indexer(obj):
             elif value:
                 indexed.append(str(value))
 
-    for name, adapter in getAdapters((obj,), IDynamicTextIndexExtender):
+    for name, adapter in getAdapters((obj, ), IDynamicTextIndexExtender):
         extended_value = adapter()
         if not extended_value:
             continue
