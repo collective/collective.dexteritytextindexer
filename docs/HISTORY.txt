@@ -4,6 +4,10 @@ Changelog
 
 1.0b3
 -----
+
+* Fixed tests for compaitbility with plone.app.testing 4.0a3: Use TEST_USER_ID instead of TEST_USER_NAME
+  [jbaumann]
+
 * fixed Bug UnicodeError:  while indexing lists  or dicts with special chars (Non-Ascii characters)
   [phgross]
 
