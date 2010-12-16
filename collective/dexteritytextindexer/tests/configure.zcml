@@ -23,11 +23,4 @@
           for="plone.dexterity.interfaces.IDexterityContent"
           />
 
-    <plone:behavior
-          title="dict behavior"
-          description=""
-          provides=".behaviors.IDictBehavior"
-          for="plone.dexterity.interfaces.IDexterityContent"
-          />
-
 </configure>
