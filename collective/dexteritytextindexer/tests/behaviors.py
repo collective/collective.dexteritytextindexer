@@ -35,14 +35,3 @@ class IIntBehavior(form.Schema):
 
 
 alsoProvides(IIntBehavior, IFormFieldProvider)
-
-
-class IDictBehavior(form.Schema):
-
-    dexteritytextindexer.searchable('dict_field')
-    dict_field = schema.Dict(
-        title=u'Dict field',
-        value_type=schema.TextLine(),
-        key_type=schema.TextLine())
-
-alsoProvides(IDictBehavior, IFormFieldProvider)
