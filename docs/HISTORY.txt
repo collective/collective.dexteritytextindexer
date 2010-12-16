@@ -5,6 +5,9 @@ Changelog
 1.0b3
 -----
 
+* Moved `IDynamicTextIndexExtender` to `interfaces` module.
+  [jbaumann]
+
 * The `plone.namedfile` is now optional. The new namedfile converting
   adapter is only registered if its present
   [jbaumann]

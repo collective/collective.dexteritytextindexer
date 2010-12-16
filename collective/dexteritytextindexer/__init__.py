@@ -1,8 +1,8 @@
 import zope.deferredimport
 
 zope.deferredimport.defineFrom(
-    'collective.dexteritytextindexer.indexer',
-    'IDynamicTextIndexExtender')
+    'collective.dexteritytextindexer.interfaces',
+    'IDynamicTextIndexExtender', 'IDexterityTextIndexFieldConverter')
 
 zope.deferredimport.defineFrom(
     'collective.dexteritytextindexer.directives',

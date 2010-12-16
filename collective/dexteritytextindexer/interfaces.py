@@ -16,3 +16,9 @@ class IDexterityTextIndexFieldConverter(Interface):
         Message-objects are already translated into normal strings. On a
         multi-language site the
         """
+
+
+class IDynamicTextIndexExtender(Interface):
+    """Adapter interface for a named adapter which extends the dynamic
+    text indexer.
+    """

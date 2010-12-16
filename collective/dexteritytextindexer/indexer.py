@@ -10,14 +10,7 @@ from z3c.form.interfaces import DISPLAY_MODE, IFieldWidget
 from z3c.form.interfaces import IContextAware, IFormLayer, IField
 from zope import schema
 from zope.component import getAdapters, getMultiAdapter
-from zope.interface import Interface
 from zope.interface import alsoProvides
-
-
-class IDynamicTextIndexExtender(Interface):
-    """Adapter interface for a named adapter which extends the dynamic
-    text indexer.
-    """
 
 
 @indexer(IDexterityTextIndexer)
@@ -70,7 +63,7 @@ def dynamic_searchable_text_indexer(obj):
 
     # after converting all fields, run additional
     # IDynamicTextIndexExtender adapters.
-    for name, adapter in getAdapters((obj,), IDynamicTextIndexExtender):
+    for name, adapter in getAdapters((obj,), interfaces.IDynamicTextIndexExtender):
         extended_value = adapter()
 
         # if no value was returned, we don't need to index anything.
