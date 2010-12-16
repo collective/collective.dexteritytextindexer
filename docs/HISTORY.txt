@@ -5,6 +5,15 @@ Changelog
 1.0b3
 -----
 
+* The `plone.namedfile` is now optional. The new namedfile converting
+  adapter is only registered if its present
+  [jbaumann]
+
+* Re-implemented converting of field data with an newly introduced adapter.
+  The default converter just converts the widget in display mode and
+  transforms it to text/plain.
+  [jbaumann]
+
 * Fixed tests for compaitbility with plone.app.testing 4.0a3: Use TEST_USER_ID instead of TEST_USER_NAME
   [jbaumann]
 
