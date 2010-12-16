@@ -59,6 +59,40 @@ soon you enable it in your content type, where `IDexterityTextIndexer` behavior
 is enabled too.
 
 
+Registering a custom field converter
+====================================
+
+By default, a field is converted to a searchable text by rendering the widget
+in display mode and transforming the result to text/plain. However, if you need
+to convert your custom field in a different way, you only have to provide a
+more specific converter multi-adapter.
+
+Convert multi-adapter specification:
+
+:Interface: `collective.dexteritytextindexer.IDexterityTextIndexFieldConverter`
+:Discriminators: context, field, widget
+
+Example::
+
+    from collective.dexteritytextindexer.converters import DefaultDexterityTextIndexFieldConverter
+    from five import grok
+    from my.package.interfaces import IMyFancyField
+    from plone.dexterity.interfaces import IDexterityContent
+    from z3c.form.interfaces import IWidget
+
+    class CustomFieldConverter(DefaultDexterityTextIndexFieldConverter):
+        grok.adapts(IDexterityContent, IMyFancyField, IWidget)
+
+        def convert(self):
+             # implement your custom converter
+             # which returns a string at the end
+             return ''
+
+There is already an adapter for converting NamedFiles properly. It's registered
+only if `plone.namedfile` is installed.
+
+
+
 Extending indexed data
 ======================
 
