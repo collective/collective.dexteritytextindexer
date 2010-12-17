@@ -33,7 +33,7 @@ def dynamic_searchable_text_indexer(obj):
             # we need the form-field, not the schema-field we
             # already have..
             form_field = Field(field, interface=field.interface,
-                       prefix='')
+                               prefix='')
 
             # get the widget
             widget = get_field_widget(obj, form_field)
@@ -63,7 +63,8 @@ def dynamic_searchable_text_indexer(obj):
 
     # after converting all fields, run additional
     # IDynamicTextIndexExtender adapters.
-    for name, adapter in getAdapters((obj,), interfaces.IDynamicTextIndexExtender):
+    for name, adapter in getAdapters(
+        (obj,), interfaces.IDynamicTextIndexExtender):
         extended_value = adapter()
 
         # if no value was returned, we don't need to index anything.
@@ -75,7 +76,7 @@ def dynamic_searchable_text_indexer(obj):
             extended_value = extended_value.encode('utf-8')
 
         # only accept strings
-        assert isinstance(value, str), 'expected converted ' + \
+        assert isinstance(extended_value, str), 'expected converted ' + \
             'value of IDynamicTextIndexExtender to be a str'
 
         indexed.append(extended_value)

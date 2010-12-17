@@ -5,6 +5,9 @@ Changelog
 1.0b4
 -----
 
+* Fixed assertion bug when using a `IDynamicTextIndexExtender` adapter.
+  [jbaumann]
+
 
 1.0b3
 -----
