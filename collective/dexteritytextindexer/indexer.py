@@ -13,16 +13,25 @@ from zope.component import getAdapters, getMultiAdapter
 from zope.interface import alsoProvides
 
 
+class FakeView(object):
+    """This fake view is used for enabled z3c forms z2 mode on.
+    """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+
 @indexer(IDexterityTextIndexer)
 def dynamic_searchable_text_indexer(obj):
     """Dynamic searchable text indexer.
     """
 
-    # We need to make sure that we have z2 moe switched on for z3c form.
+    # We need to make sure that we have z2 mode switched on for z3c form.
     # Since we do not really have any view to do this on, we just use
-    # the "view" view, which usually exists. It's not necessary that
-    # the view points to a z3cform, only view.request is used..
-    view = obj.restrictedTraverse('view')
+    # a fake view. For switching z2 mode on, it's only necessary that
+    # there is a view.request.
+    view = FakeView(obj, obj.REQUEST)
     z2.switch_on(view, request_layer=IFormLayer)
 
     indexed = []
