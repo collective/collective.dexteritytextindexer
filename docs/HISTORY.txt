@@ -5,6 +5,9 @@ Changelog
 1.1
 ---
 
+* Made reindexer more robust, since sometimes the field values may be wrong.
+  [jbaumann]
+
 * Do not traverse to "view" in indexer, this could cause security issues especially in tests.
   Using now a fake-view for enabling z2 mode.
   [jbaumann]

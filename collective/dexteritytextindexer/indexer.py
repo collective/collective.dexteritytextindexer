@@ -45,7 +45,12 @@ def dynamic_searchable_text_indexer(obj):
                                prefix='')
 
             # get the widget
-            widget = get_field_widget(obj, form_field)
+            try:
+                widget = get_field_widget(obj, form_field)
+            except TypeError:
+                # Some times the field value is wrong, then the converter
+                # failes. We should not fail, so we catch this error.
+                continue
 
             # get the converter for this field / widget
             converter = getMultiAdapter(
