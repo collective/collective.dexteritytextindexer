@@ -59,14 +59,15 @@ if HAS_NAMEDFILE:
 
             # if there is no path to text/plain, do nothing
             transforms = getToolByName(self.context, 'portal_transforms')
-            if transforms._findPath(data.contentType, 'text/plain'):
+            if not transforms._findPath(data.contentType, 'text/plain'):
                 return ''
 
             # convert it to text/plain
             try:
-                return transforms.convertTo(
+                datastream = transforms.convertTo(
                     'text/plain', data.data, mimetype=data.contentType,
                     filename=data.filename)
+                return datastream.getData()
 
             except (ConflictError, KeyboardInterrupt):
                 raise

@@ -5,6 +5,8 @@ Changelog
 1.2
 ---
 
+* Fixed data transforms in NamedFileConverter
+  [lgraf]
 
 
 1.1
