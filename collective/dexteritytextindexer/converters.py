@@ -35,7 +35,7 @@ class DefaultDexterityTextIndexFieldConverter(grok.MultiAdapter):
     def convert(self):
         html = self.widget.render().strip()
         transforms = getToolByName(self.context, 'portal_transforms')
-        stream = transforms.convertTo('text/plain', html)
+        stream = transforms.convertTo('text/plain', html, mimetype='text/html')
         return stream.getData().strip()
 
 
