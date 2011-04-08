@@ -1,3 +1,9 @@
+"""Testing setup providing layers and fixtures
+TextIndexerLayer                   basic text indexer layer
+TEXT_INDEXER_FIXTURE               text indexer fixture
+TEXT_INTEXER_INTEGRATION_TESTING   integration testing layer
+"""
+
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
@@ -11,7 +17,8 @@ class TextIndexerLayer(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        # Load ZCML
+        """After setting up zope, load all necessary zcml files.
+        """
         import collective.dexteritytextindexer
         xmlconfig.file('configure.zcml', collective.dexteritytextindexer,
                        context=configurationContext)
@@ -21,6 +28,8 @@ class TextIndexerLayer(PloneSandboxLayer):
                        context=configurationContext)
 
     def setUpPloneSite(self, portal):
+        """After setting up plone, give Manager role to the test user.
+        """
         setRoles(portal, TEST_USER_ID, ['Manager'])
 
 

@@ -1,3 +1,8 @@
+"""The ``searchable`` martian directive is used to mark a field as
+searchable within a schema interface.
+"""
+
+
 from plone.directives.form.schema import FormMetadataListStorage
 from zope.interface import Interface
 from zope.interface.interfaces import IInterface
@@ -18,6 +23,9 @@ class searchable(martian.Directive):
     value = 'true'
 
     def factory(self, *args):
+        """The searchable directive accepts as arguments one or more
+        fieldnames (string) of fields which should be searchable.
+        """
         if not args:
             raise TypeError('The searchable directive expects at '
                             'least one argument.')

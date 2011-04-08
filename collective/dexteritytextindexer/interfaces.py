@@ -1,3 +1,8 @@
+"""
+IDexterityTextIndexFieldConverter  field converter adapter interface
+IDynamicTextIndexExtender          dynmaic text extender adapter interface
+"""
+
 from zope.interface import Interface
 
 
@@ -7,11 +12,11 @@ class IDexterityTextIndexFieldConverter(Interface):
     the searchable text index.
     """
 
-    def __init__(context, field, widget):
+    def __init__(self, context, field, widget):
         """The multi-adpater adapts the context, the field and the widget.
         """
 
-    def convert():
+    def convert(self):
         """Returns a string containing the words to index. Translatable
         Message-objects are already translated into normal strings. On a
         multi-language site the

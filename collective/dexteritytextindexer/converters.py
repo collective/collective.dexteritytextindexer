@@ -1,3 +1,9 @@
+"""
+DefaultDexterityTextIndexFieldConverter    the default field converter
+NamedfileFieldConverter                    an optional namedfile field
+converter only enabled when plone.namedfile is installed
+"""
+
 from Products.CMFCore.utils import getToolByName
 from ZODB.POSException import ConflictError
 from collective.dexteritytextindexer import interfaces
@@ -28,11 +34,13 @@ class DefaultDexterityTextIndexFieldConverter(grok.MultiAdapter):
     grok.adapts(IDexterityContent, IField, IWidget)
 
     def __init__(self, context, field, widget):
+        """Initialize field converter"""
         self.context = context
         self.field = field
         self.widget = widget
 
     def convert(self):
+        """Convert the adapted field value to text/plain for indexing"""
         html = self.widget.render().strip()
         transforms = getToolByName(self.context, 'portal_transforms')
         stream = transforms.convertTo('text/plain', html, mimetype='text/html')

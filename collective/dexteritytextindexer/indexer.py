@@ -1,3 +1,6 @@
+"""Contains the indexer and some helper methods for indexing.
+"""
+
 from collective.dexteritytextindexer import interfaces
 from collective.dexteritytextindexer.behavior import IDexterityTextIndexer
 from collective.dexteritytextindexer.directives import SEARCHABLE_KEY

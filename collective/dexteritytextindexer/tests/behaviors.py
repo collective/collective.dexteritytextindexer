@@ -1,3 +1,6 @@
+"""Contains different behaviors needed for testing.
+"""
+
 from collective import dexteritytextindexer
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.directives import form
@@ -6,6 +9,8 @@ from zope.interface import alsoProvides
 
 
 class ISimpleBehavior(form.Schema):
+    """Simple behavior containing simple text line fields.
+    """
 
     dexteritytextindexer.searchable('foo')
     foo = schema.TextLine(title=u'Foo')
@@ -17,6 +22,8 @@ alsoProvides(ISimpleBehavior, IFormFieldProvider)
 
 
 class IListBehavior(form.Schema):
+    """More advanced behavior with a list of fields.
+    """
 
     dexteritytextindexer.searchable('list_field')
 
@@ -29,6 +36,8 @@ alsoProvides(IListBehavior, IFormFieldProvider)
 
 
 class IIntBehavior(form.Schema):
+    """Basic behavior with a integer field.
+    """
 
     dexteritytextindexer.searchable('int_field')
     int_field = schema.Int(title=u'Int')
