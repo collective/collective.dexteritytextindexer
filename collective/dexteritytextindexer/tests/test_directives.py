@@ -43,3 +43,29 @@ class TestDirectives(unittest.TestCase):
 
         self.assertEquals([(Interface, 'foo', 'true')],
                           IDummy.queryTaggedValue(SEARCHABLE_KEY))
+
+    def test_inherited_schema_still_has_tagged_value(self):
+        """An inherited schema should still have the tagged value information
+        inherited from its superclass.
+        """
+
+        class IFoo(form.Schema):
+            """Class with a searchable field
+            """
+            searchable('baz')
+            baz = schema.TextLine(title=u'baz')
+
+        class IBar(IFoo):
+            """Schema class which inherits a field from IFoo.
+            """
+
+        self.assertEquals(None, IFoo.queryTaggedValue(SEARCHABLE_KEY))
+        self.assertEquals(None, IBar.queryTaggedValue(SEARCHABLE_KEY))
+
+        grok_component('IFoo', IFoo)
+        grok_component('IBar', IBar)
+
+        self.assertEquals([(Interface, 'baz', 'true')],
+                          IFoo.queryTaggedValue(SEARCHABLE_KEY))
+        self.assertEquals([(Interface, 'baz', 'true')],
+                          IBar.queryTaggedValue(SEARCHABLE_KEY))
