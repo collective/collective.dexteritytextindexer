@@ -5,6 +5,10 @@ Changelog
 1.3
 ---
 
+* Fixed querying of tagged values: use helper function mergedTaggedValueList - which also looks
+  up tagged values on superclasses.
+  [jbaumann]
+
 * Fixed html to text transform call: added source mimetype.
   [jbaumann]
 

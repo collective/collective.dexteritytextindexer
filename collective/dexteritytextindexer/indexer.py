@@ -7,6 +7,7 @@ from collective.dexteritytextindexer.directives import SEARCHABLE_KEY
 from five import grok
 from plone.dexterity.utils import iterSchemata
 from plone.indexer import indexer
+from plone.supermodel.utils import mergedTaggedValueList
 from plone.z3cform import z2
 from z3c.form.field import Field
 from z3c.form.interfaces import DISPLAY_MODE, IFieldWidget
@@ -136,7 +137,7 @@ def get_searchable_contexts_and_fields(obj):
 
     for schemata in iterSchemata(obj):
         fields = []
-        tagged_values = schemata.queryTaggedValue(SEARCHABLE_KEY)
+        tagged_values = mergedTaggedValueList(schemata, SEARCHABLE_KEY)
         if not tagged_values:
             continue
 

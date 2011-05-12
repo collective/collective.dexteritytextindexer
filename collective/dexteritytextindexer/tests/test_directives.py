@@ -5,6 +5,7 @@ from collective.dexteritytextindexer.directives import SEARCHABLE_KEY
 from collective.dexteritytextindexer.directives import searchable
 from grokcore.component.testing import grok, grok_component
 from plone.directives import form
+from plone.supermodel.utils import mergedTaggedValueList
 from zope import schema
 from zope.interface import Interface
 import unittest
@@ -37,12 +38,12 @@ class TestDirectives(unittest.TestCase):
             searchable('foo')
             foo = schema.TextLine(title=u'Foo')
 
-        self.assertEquals(None, IDummy.queryTaggedValue(SEARCHABLE_KEY))
+        self.assertEquals([], mergedTaggedValueList(IDummy, SEARCHABLE_KEY))
 
         grok_component('IDummy', IDummy)
 
         self.assertEquals([(Interface, 'foo', 'true')],
-                          IDummy.queryTaggedValue(SEARCHABLE_KEY))
+                          mergedTaggedValueList(IDummy, SEARCHABLE_KEY))
 
     def test_inherited_schema_still_has_tagged_value(self):
         """An inherited schema should still have the tagged value information
@@ -59,13 +60,13 @@ class TestDirectives(unittest.TestCase):
             """Schema class which inherits a field from IFoo.
             """
 
-        self.assertEquals(None, IFoo.queryTaggedValue(SEARCHABLE_KEY))
-        self.assertEquals(None, IBar.queryTaggedValue(SEARCHABLE_KEY))
+        self.assertEquals([], mergedTaggedValueList(IFoo, SEARCHABLE_KEY))
+        self.assertEquals([], mergedTaggedValueList(IBar, SEARCHABLE_KEY))
 
         grok_component('IFoo', IFoo)
         grok_component('IBar', IBar)
 
         self.assertEquals([(Interface, 'baz', 'true')],
-                          IFoo.queryTaggedValue(SEARCHABLE_KEY))
+                          mergedTaggedValueList(IFoo, SEARCHABLE_KEY))
         self.assertEquals([(Interface, 'baz', 'true')],
-                          IBar.queryTaggedValue(SEARCHABLE_KEY))
+                          mergedTaggedValueList(IBar, SEARCHABLE_KEY))
