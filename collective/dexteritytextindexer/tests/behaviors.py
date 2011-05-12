@@ -44,3 +44,11 @@ class IIntBehavior(form.Schema):
 
 
 alsoProvides(IIntBehavior, IFormFieldProvider)
+
+
+class IInheritedBehavior(ISimpleBehavior):
+    """Behavior extending from ISimpleBehavior for testing inheritance.
+    """
+
+
+alsoProvides(IInheritedBehavior, IFormFieldProvider)

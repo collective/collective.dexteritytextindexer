@@ -101,3 +101,28 @@ Do ints work?
     ['57']
 
 
+Test, if a subclassed schema also inherits the searchable configuration of
+it's superclass:
+
+    >>> from collective.dexteritytextindexer.tests.behaviors import IInheritedBehavior
+    >>> grok_component('IInheritedBehavior', IInheritedBehavior)
+    True
+    >>> fti = DexterityFTI('InheritedFTI')
+    >>> fti.behaviors = (
+    ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
+    ...     'collective.dexteritytextindexer.tests.behaviors.IInheritedBehavior',
+    ... )
+    >>> portal.portal_types._setObject('InheritedFTI', fti)
+    'InheritedFTI'
+    >>> schema = fti.lookupSchema()
+
+    >>> obj1 = createContentInContainer(portal, 'InheritedFTI',
+    ...                                 checkContstraints=False,
+    ...                                 foo='foo value',
+    ...                                 bar='bar value')
+    >>> obj1
+    <Item at /plone/inheritedfti>
+    >>> getSearchableText(obj1)
+    ['foo', 'value']
+
+
