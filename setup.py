@@ -7,6 +7,8 @@ tests_require = [
     'zope.testing',
     'zope.schema',
     'plone.app.testing',
+    'plone.autoform',
+    'plone.testing',
     ]
 
 setup(name='collective.dexteritytextindexer',
@@ -38,9 +40,14 @@ setup(name='collective.dexteritytextindexer',
         'zope.interface',
         'plone.directives.form',
         'plone.dexterity',
+        'plone.supermodel',
+        'plone.z3cform',
+        'z3c.form',
         ],
       tests_require=tests_require,
-      extras_require=dict(tests=tests_require),
+      extras_require=dict(
+        tests=tests_require,
+        namedfile=['plone.namedfile']),
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]
