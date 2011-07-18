@@ -1,6 +1,5 @@
 exclude .installed.cfg
 exclude buildout.cfg
-global-exclude *.mo
 global-exclude *.pyc
 global-exclude .DS_Store
 global-exclude ._*
