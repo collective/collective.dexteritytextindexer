@@ -9,7 +9,7 @@ from ZODB.POSException import ConflictError
 from collective.dexteritytextindexer import interfaces
 from five import grok
 from plone.dexterity.interfaces import IDexterityContent
-from zope.schema.interfaces import IField
+from zope.schema.interfaces import IField, IInt
 from z3c.form.interfaces import IWidget
 import logging
 
@@ -83,3 +83,16 @@ if HAS_NAMEDFILE:
             except Exception, e:
                 LOGGER.error('Error while trying to convert file contents '
                              'to "text/plain": %s' % str(e))
+
+
+class IntFieldConverter(DefaultDexterityTextIndexFieldConverter):
+    """Converts the data of a int field"""
+
+    grok.provides(interfaces.IDexterityTextIndexFieldConverter)
+    grok.adapts(IDexterityContent, IInt, IWidget)
+
+    def convert(self):
+        """return the adapted field value"""
+        storage = self.field.interface(self.context)
+        value = self.field.get(storage)
+        return str(value)

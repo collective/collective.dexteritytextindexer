@@ -5,9 +5,8 @@ Changelog
 1.4
 ---
 
-
-1.4
----
+* Added IntFieldConverter, wich return the plain value instead of the render method (600000 --> 600,000)
+  [phgross]
 
 
 1.3
