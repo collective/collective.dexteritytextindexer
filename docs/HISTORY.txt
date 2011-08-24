@@ -5,9 +5,8 @@ Changelog
 1.5
 ---
 
-
-1.5
----
+* Added test-buildout for plone-4.1.x
+  [lgraf]
 
 
 1.4
