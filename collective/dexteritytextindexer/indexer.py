@@ -125,6 +125,7 @@ def get_field_widget(obj, field):
     widget.context = obj
     alsoProvides(widget, IContextAware)
     widget.mode = DISPLAY_MODE
+    widget.ignoreRequest = True
     widget.update()
     return widget
 

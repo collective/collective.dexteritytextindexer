@@ -53,6 +53,21 @@ First test it with a simple behavior:
     >>> getSearchableText(obj1)
     ['foox']
 
+
+Test, if the value getter works also, when the request has stored another value for this field.
+    >>> schema = fti.lookupSchema()
+
+    >>> portal.REQUEST.form['foo'] = 'blubb'
+    >>> obj1 = createContentInContainer(portal, 'SimpleFTI',
+    ...                                 checkContstraints=False,
+    ...                                 foo='foox',
+    ...                                 bar='barx')
+    >>> obj1
+    <Item at /plone/simplefti-1>
+    >>> getSearchableText(obj1)
+    ['foox']
+
+
 Does a list work?
 
     >>> from collective.dexteritytextindexer.tests.behaviors import IListBehavior
