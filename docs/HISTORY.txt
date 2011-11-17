@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.5 (unreleased)
+1.4.1 (unreleased)
 ----------------
 
 - ignore the request in the get_field_widget method, to avoid problems with request variables wich have the same name than the field.
