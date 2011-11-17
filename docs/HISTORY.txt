@@ -2,48 +2,48 @@ Changelog
 =========
 
 
-1.5
----
+1.5 (unreleased)
+----------------
 
-* ignore the request in the get_field_widget method, to avoid problems with request variables wich have the same name than the field.
+- ignore the request in the get_field_widget method, to avoid problems with request variables wich have the same name than the field.
   [phgross]
 
-* Added test-buildout for plone-4.1.x
+- Added test-buildout for plone-4.1.x
   [lgraf]
 
 
-1.4
----
+1.4 (2011-08-24)
+----------------
 
-* Added IntFieldConverter, wich return the plain value instead of the render method (600000 --> 600,000)
+- Added IntFieldConverter, wich return the plain value instead of the render method (600000 --> 600,000)
   [phgross]
 
 
 1.3
 ---
 
-* Fixed querying of tagged values: use helper function mergedTaggedValueList - which also looks
+- Fixed querying of tagged values: use helper function mergedTaggedValueList - which also looks
   up tagged values on superclasses.
   [jbaumann]
 
-* Fixed html to text transform call: added source mimetype.
+- Fixed html to text transform call: added source mimetype.
   [jbaumann]
 
 
 1.2
 ---
 
-* Fixed data transforms in NamedFileConverter
+- Fixed data transforms in NamedFileConverter
   [lgraf]
 
 
 1.1
 ---
 
-* Made reindexer more robust, since sometimes the field values may be wrong.
+- Made reindexer more robust, since sometimes the field values may be wrong.
   [jbaumann]
 
-* Do not traverse to "view" in indexer, this could cause security issues especially in tests.
+- Do not traverse to "view" in indexer, this could cause security issues especially in tests.
   Using now a fake-view for enabling z2 mode.
   [jbaumann]
 
@@ -51,40 +51,40 @@ Changelog
 1.0
 ---
 
-* Fixed assertion bug when using a `IDynamicTextIndexExtender` adapter.
+- Fixed assertion bug when using a `IDynamicTextIndexExtender` adapter.
   [jbaumann]
 
 
 1.0b3
 -----
 
-* Moved `IDynamicTextIndexExtender` to `interfaces` module.
+- Moved `IDynamicTextIndexExtender` to `interfaces` module.
   [jbaumann]
 
-* The `plone.namedfile` is now optional. The new namedfile converting
+- The `plone.namedfile` is now optional. The new namedfile converting
   adapter is only registered if its present
   [jbaumann]
 
-* Re-implemented converting of field data with an newly introduced adapter.
+- Re-implemented converting of field data with an newly introduced adapter.
   The default converter just converts the widget in display mode and
   transforms it to text/plain.
   [jbaumann]
 
-* Fixed tests for compaitbility with plone.app.testing 4.0a3: Use TEST_USER_ID instead of TEST_USER_NAME
+- Fixed tests for compaitbility with plone.app.testing 4.0a3: Use TEST_USER_ID instead of TEST_USER_NAME
   [jbaumann]
 
-* fixed Bug UnicodeError:  while indexing lists  or dicts with special chars (Non-Ascii characters)
+- fixed Bug UnicodeError:  while indexing lists  or dicts with special chars (Non-Ascii characters)
   [phgross]
 
 
 1.0b2
 -----
 
-* Fixed MANIFEST.in
+- Fixed MANIFEST.in
   [jbaumann]
 
 
 1.0b1
 -----
 
-* Initial release
+- Initial release
