@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.4.1 (unreleased)
-----------------
+1.4.1 (2011-11-17)
+------------------
 
 - ignore the request in the get_field_widget method, to avoid problems with request variables wich have the same name than the field.
   [phgross]
