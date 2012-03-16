@@ -5,6 +5,11 @@ Changelog
 1.4.2 (unreleased)
 ------------------
 
+- Added support for marking fields searchable in plone.supermodel XML models.
+  This is done by implementing a IFieldMetadataHandler that is capable of
+  serializing/de-serializing the corresponding taggedValue to/from XML.
+  [lgraf]
+
 - Add ``utils.searchable`` method for marking fields of third party schemas as searchable.
   [kagesenshi]
 

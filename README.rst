@@ -63,6 +63,23 @@ Don't forget to grok your package in your ``configure.zcml``::
 
     </configure>
 
+
+Alternatively, if you specified your model as a plone.supermodel XML model,
+you can mark the field searchable that way::
+
+    <model xmlns="http://namespaces.plone.org/supermodel/schema"
+           xmlns:indexer="http://namespaces.plone.org/supermodel/indexer">
+      <schema based-on="plone.directives.form.schema.Schema">
+
+          <field name="specialfield" type="zope.schema.TextLine"
+                 indexer:searchable="true">
+            <title>Special field</title>
+          </field>
+
+      </schema>
+    </model>
+
+
 Your SearchableText indexer includes now your custom field on your behavior, as
 soon you enable it in your content type, where `IDexterityTextIndexer` behavior
 is enabled too.

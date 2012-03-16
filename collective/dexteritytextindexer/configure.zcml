@@ -10,6 +10,7 @@
 
     <!-- grok it -->
     <include package="five.grok" />
+    <include package="plone.supermodel" />
     <grok:grok package="." />
 
     <!-- marker behavior for enabling indexer -->
@@ -19,5 +20,10 @@
           provides="collective.dexteritytextindexer.behavior.IDexterityTextIndexer"
           for="plone.dexterity.interfaces.IDexterityContent"
           />
+
+    <utility
+        factory=".supermodel.IndexerSchema"
+        name="collective.dexteritytextindexer.indexer"
+        />
 
 </configure>

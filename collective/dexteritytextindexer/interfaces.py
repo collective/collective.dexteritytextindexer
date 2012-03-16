@@ -6,6 +6,11 @@ IDynamicTextIndexExtender          dynmaic text extender adapter interface
 from zope.interface import Interface
 
 
+# Supermodel namespace and prefix
+INDEXER_NAMESPACE = 'http://namespaces.plone.org/supermodel/indexer'
+INDEXER_PREFIX = 'indexer'
+
+
 class IDexterityTextIndexFieldConverter(Interface):
     """Interface for a multi-adapter which converts the field value of the
     adapted field into a human readable, translated text for indexing in
