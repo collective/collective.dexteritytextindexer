@@ -5,7 +5,8 @@ Changelog
 1.4.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add ``utils.searchable`` method for marking fields of third party schemas as searchable.
+  [kagesenshi]
 
 
 1.4.1 (2011-11-17)

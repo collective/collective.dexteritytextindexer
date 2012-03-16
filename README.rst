@@ -43,6 +43,15 @@ is done with directives::
 
     alsoProvides(IMyBehavior, IFormFieldProvider)
 
+If you want to mark fields of an existing 3rd party behaviors. This can be 
+done using this utility function::
+
+    from plone.app.dexterity.interfaces.IBasic
+    from collective.dexteritytextindexer.utils import searchable
+
+    searchable(IBasic, 'title')
+    searchable(IBasic, 'description')
+
 
 Don't forget to grok your package in your ``configure.zcml``::
 
