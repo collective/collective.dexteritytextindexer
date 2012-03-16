@@ -43,7 +43,7 @@ is done with directives::
 
     alsoProvides(IMyBehavior, IFormFieldProvider)
 
-If you want to mark fields of an existing 3rd party behaviors. This can be 
+If you want to mark fields of an existing 3rd party behavior, it can be
 done using this utility function::
 
     from plone.app.dexterity.interfaces.IBasic
