@@ -27,7 +27,7 @@ In your *profiles/default/types/YOURTYPE.xml* add the behavior::
     </object>
 
 
-Now you need to mark the fields you wan't to have in your SearchableText. This
+Now you need to mark the fields you want to have in your SearchableText. This
 is done with directives::
 
     from collective import dexteritytextindexer
@@ -46,7 +46,7 @@ is done with directives::
 If you want to mark fields of an existing 3rd party behavior, it can be
 done using this utility function::
 
-    from plone.app.dexterity.interfaces.IBasic
+    from plone.app.dexterity.interfaces import IBasic
     from collective.dexteritytextindexer.utils import searchable
 
     searchable(IBasic, 'title')
