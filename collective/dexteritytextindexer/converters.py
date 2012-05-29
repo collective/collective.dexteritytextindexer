@@ -41,10 +41,16 @@ class DefaultDexterityTextIndexFieldConverter(grok.MultiAdapter):
 
     def convert(self):
         """Convert the adapted field value to text/plain for indexing"""
-        html = self.widget.render().strip()
-        transforms = getToolByName(self.context, 'portal_transforms')
-        stream = transforms.convertTo('text/plain', html, mimetype='text/html')
-        return stream.getData().strip()
+        if self.field.get(self.context).raw:
+            html = self.widget.render().strip()
+            transforms = getToolByName(self.context, 'portal_transforms')
+            try:
+                stream = transforms.convertTo('text/plain', html, mimetype='text/html')
+                return stream.getData().strip()
+            except UnicodeDecodeError:
+                return ''
+        else:
+            return ''
 
 
 if HAS_NAMEDFILE:
