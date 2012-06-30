@@ -12,6 +12,8 @@ Changelog
 
   - Make sure that indexing other existing fields of the same schema works.
 
+  - searchable utils function: raise AttributeError when field is missing.
+
   [jone]
 
 - Added support for marking fields searchable in plone.supermodel XML models.
