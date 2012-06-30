@@ -153,13 +153,13 @@ interface (dexterity objects do not provide behavior interfaces of behaviors,
 which are not using attribute storage).
 
 
-Credits
-=======
+Contributors
+============
 
-Sponsered by `4teamwork`_.
+(In order of appearance)
 
- * `Jonas Baumann`_, author
-
-
-.. _`4teamwork`: http://www.4teamwork.ch/
-.. _`Jonas Baumann`: http://github.com/jone
+- `Jonas Baumann <http://github.com/jone>`_
+- `Philippe Gross <http://github.com/phgross>`_
+- `Lukas Graf <http://github.com/lukasgraf>`_
+- `Izhar Firdaus <http://github.com/kagesenshi>`_
+- `Sune Broendum Woeller <http://github.com/sunew>`_
