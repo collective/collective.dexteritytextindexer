@@ -52,3 +52,16 @@ class IInheritedBehavior(ISimpleBehavior):
 
 
 alsoProvides(IInheritedBehavior, IFormFieldProvider)
+
+
+class IMissingFieldBehavior(form.Schema):
+    """A behavior defining a field as searchable which does not exist.
+    """
+
+    dexteritytextindexer.searchable('foo')
+    foo = schema.TextLine(title=u'Foo')
+
+    dexteritytextindexer.searchable('bar')
+
+
+alsoProvides(IMissingFieldBehavior, IFormFieldProvider)

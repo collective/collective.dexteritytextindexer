@@ -15,6 +15,10 @@ from z3c.form.interfaces import IContextAware, IFormLayer, IField
 from zope import schema
 from zope.component import getAdapters, getMultiAdapter
 from zope.interface import alsoProvides
+import logging
+
+
+LOGGER = logging.getLogger('collective.dexteritytextindexer')
 
 
 class FakeView(object):
@@ -143,7 +147,14 @@ def get_searchable_contexts_and_fields(obj):
             continue
 
         for i, name, v in tagged_values:
-            fields.append(schema.getFields(schemata).get(name))
+            field = schema.getFields(schemata).get(name)
+            if not field:
+                dottedname = '.'.join((schemata.__module__, schemata.__name__))
+                logging.error('%s has no field "%s"' % (
+                        dottedname, name))
+
+            else:
+                fields.append(field)
 
         if fields:
             storage = schemata(obj)
