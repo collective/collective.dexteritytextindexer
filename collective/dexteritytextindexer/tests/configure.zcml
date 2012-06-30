@@ -1,6 +1,7 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:grok="http://namespaces.zope.org/grok"
-           xmlns:plone="http://namespaces.plone.org/plone">
+           xmlns:plone="http://namespaces.plone.org/plone"
+           i18n_domain="collective.dexteritytextindexer">
 
     <plone:behavior
           title="simple behavior"
@@ -27,6 +28,13 @@
           title="inherited behavior"
           description=""
           provides=".behaviors.IInheritedBehavior"
+          for="plone.dexterity.interfaces.IDexterityContent"
+          />
+
+    <plone:behavior
+          title="missing field behavior"
+          description=""
+          provides=".behaviors.IMissingFieldBehavior"
           for="plone.dexterity.interfaces.IDexterityContent"
           />
 

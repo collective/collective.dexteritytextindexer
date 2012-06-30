@@ -116,6 +116,34 @@ Do ints work?
     ['57']
 
 
+When a schema marks a field as searchable which does not exist it should:
+- not break indexing other fields
+- log an error
+
+    >>> from collective.dexteritytextindexer.tests.behaviors import IMissingFieldBehavior
+    >>> grok_component('IMissingFieldBehavior', IMissingFieldBehavior)
+    True
+    >>> fti = DexterityFTI('MissingFieldFTI')
+    >>> fti.behaviors = (
+    ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
+    ...     'collective.dexteritytextindexer.tests.behaviors.IMissingFieldBehavior',
+    ... )
+    >>> portal.portal_types._setObject('MissingFieldFTI', fti)
+    'MissingFieldFTI'
+    >>> schema = fti.lookupSchema()
+
+    >>> obj = createContentInContainer(portal, 'MissingFieldFTI',
+    ...                                checkContstraints=False,
+    ...                                foo='foo value')
+    >>> obj
+    <Item at /plone/missingfieldfti>
+    >>> getSearchableText(obj)
+    ['foo', 'value']
+
+    >>> 'IMissingFieldBehavior has no field "bar"' in layer['read_log']()
+    True
+
+
 Test, if a subclassed schema also inherits the searchable configuration of
 it's superclass:
 
@@ -139,5 +167,3 @@ it's superclass:
     <Item at /plone/inheritedfti>
     >>> getSearchableText(obj1)
     ['foo', 'value']
-
-

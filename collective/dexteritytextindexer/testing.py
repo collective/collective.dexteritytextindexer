@@ -4,12 +4,14 @@ TEXT_INDEXER_FIXTURE               text indexer fixture
 TEXT_INTEXER_INTEGRATION_TESTING   integration testing layer
 """
 
+from StringIO import StringIO
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 from zope.configuration import xmlconfig
+import logging
 
 
 class TextIndexerLayer(PloneSandboxLayer):
@@ -31,6 +33,22 @@ class TextIndexerLayer(PloneSandboxLayer):
         """After setting up plone, give Manager role to the test user.
         """
         setRoles(portal, TEST_USER_ID, ['Manager'])
+
+    def testSetUp(self):
+        super(TextIndexerLayer, self).testSetUp()
+        self.log = StringIO()
+        self.log_handler = logging.StreamHandler(self.log)
+        logging.root.addHandler(self.log_handler)
+        self['read_log'] = self.read_log
+
+    def testTearDown(self):
+        super(TextIndexerLayer, self).testTearDown()
+        logging.root.removeHandler(self.log_handler)
+
+    def read_log(self):
+        self.log.seek(0)
+        return self.log.read().strip()
+
 
 
 TEXT_INDEXER_FIXTURE = TextIndexerLayer()

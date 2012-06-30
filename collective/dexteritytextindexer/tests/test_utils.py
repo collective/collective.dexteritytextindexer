@@ -11,6 +11,10 @@ class IExample(form.Schema):
     foo = schema.TextLine(title=u'foo')
 
 
+class IBar(form.Schema):
+    pass
+
+
 class TestUtils(TestCase):
     """Test utils module.
     """
@@ -21,3 +25,12 @@ class TestUtils(TestCase):
         searchable(IExample, u'foo')
         self.assertEquals([(IExample, 'foo', 'true')],
                           mergedTaggedValueList(IExample, SEARCHABLE_KEY))
+
+    def test_break_when_field_does_not_exist(self):
+        with self.assertRaises(AttributeError) as cm:
+            searchable(IBar, u'foo')
+
+        self.assertEqual(
+            str(cm.exception),
+            'collective.dexteritytextindexer.tests.test_utils.IBar'
+            ' has no field "foo"')
