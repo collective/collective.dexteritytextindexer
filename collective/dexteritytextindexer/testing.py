@@ -18,6 +18,11 @@ class TextIndexerLayer(PloneSandboxLayer):
 
     defaultBases = (PLONE_FIXTURE,)
 
+    def __init__(self, *args, **kwargs):
+        super(TextIndexerLayer, self).__init__(*args, **kwargs)
+        self.log = None
+        self.log_handler = None
+
     def setUpZope(self, app, configurationContext):
         """After setting up zope, load all necessary zcml files.
         """
@@ -48,7 +53,6 @@ class TextIndexerLayer(PloneSandboxLayer):
     def read_log(self):
         self.log.seek(0)
         return self.log.read().strip()
-
 
 
 TEXT_INDEXER_FIXTURE = TextIndexerLayer()

@@ -67,8 +67,12 @@ if HAS_NAMEDFILE:
 
             # if there is no path to text/plain, do nothing
             transforms = getToolByName(self.context, 'portal_transforms')
+
+            # pylint: disable=W0212
+            # W0212: Access to a protected member _findPath of a client class
             if not transforms._findPath(data.contentType, 'text/plain'):
                 return ''
+            # pylint: enable=W0212
 
             # convert it to text/plain
             try:
