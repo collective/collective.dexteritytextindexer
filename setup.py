@@ -43,6 +43,7 @@ setup(name='collective.dexteritytextindexer',
         'plone.supermodel',
         'plone.z3cform',
         'z3c.form',
+        'elementtree',
         ],
       tests_require=tests_require,
       extras_require=dict(
