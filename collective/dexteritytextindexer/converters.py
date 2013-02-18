@@ -65,6 +65,10 @@ if HAS_NAMEDFILE:
             if not data or data.getSize() == 0:
                 return ''
 
+            # if data is already in text/plain, just return it
+            if data.contentType == 'text/plain':
+                return data.data
+
             # if there is no path to text/plain, do nothing
             transforms = getToolByName(self.context, 'portal_transforms')
 

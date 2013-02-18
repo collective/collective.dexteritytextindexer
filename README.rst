@@ -163,3 +163,4 @@ Contributors
 - `Lukas Graf <http://github.com/lukasgraf>`_
 - `Izhar Firdaus <http://github.com/kagesenshi>`_
 - `Sune Broendum Woeller <http://github.com/sunew>`_
+- `Nejc Zupan <http://github.com/zupo>`_
