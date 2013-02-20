@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.5.1 (unreleased)
+1.5.1 (2013-02-20)
 ------------------
 
 - Do not try to convert text/plain in files, just index it as it is.
