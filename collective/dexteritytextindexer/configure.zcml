@@ -2,6 +2,7 @@
            xmlns:grok="http://namespaces.zope.org/grok"
            xmlns:i18n="http://namespaces.zope.org/i18n"
            xmlns:plone="http://namespaces.plone.org/plone"
+           xmlns:zcml="http://namespaces.zope.org/zcml"
            i18n_domain="collective.dexteritytextindexer">
 
     <!-- Include configuration for dependencies listed in setup.py -->
@@ -24,6 +25,20 @@
     <utility
         factory=".supermodel.IndexerSchema"
         name="collective.dexteritytextindexer.indexer"
+        />
+
+    <!-- field converters -->
+    <adapter
+        factory="collective.dexteritytextindexer.converters.DefaultDexterityTextIndexFieldConverter"
+        />
+
+    <adapter
+        zcml:condition="installed plone.namedfile"
+        factory="collective.dexteritytextindexer.converters.NamedfileFieldConverter"
+        />
+
+    <adapter
+        factory="collective.dexteritytextindexer.converters.IntFieldConverter"
         />
 
 </configure>
