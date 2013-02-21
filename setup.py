@@ -14,8 +14,10 @@ tests_require = [
 setup(name='collective.dexteritytextindexer',
       version=version,
       description="Dynamic SearchableText index for dexterity content types",
+
       long_description=open("README.rst").read() + "\n" + \
           open(os.path.join("docs", "HISTORY.txt")).read(),
+
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
@@ -23,15 +25,18 @@ setup(name='collective.dexteritytextindexer',
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
-      keywords='',
+
+      keywords='plone dexterity searchable text indexer',
       author='Jonas Baumann',
       author_email='mailto:info@4teamwork.ch',
       url='http://github.com/collective/collective.dexteritytextindexer',
       license='GPL2',
+
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['collective'],
       include_package_data=True,
       zip_safe=False,
+
       install_requires=[
         'setuptools',
         'plone.indexer',
@@ -44,10 +49,12 @@ setup(name='collective.dexteritytextindexer',
         'z3c.form',
         'elementtree',
         ],
+
       tests_require=tests_require,
       extras_require=dict(
         tests=tests_require,
         namedfile=['plone.namedfile']),
+
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]
