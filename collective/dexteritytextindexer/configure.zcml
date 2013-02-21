@@ -27,6 +27,10 @@
         name="collective.dexteritytextindexer.indexer"
         />
 
+    <adapter
+        factory="collective.dexteritytextindexer.indexer.dynamic_searchable_text_indexer"
+        name="SearchableText" />
+
     <!-- field converters -->
     <adapter
         factory="collective.dexteritytextindexer.converters.DefaultDexterityTextIndexFieldConverter"
