@@ -45,23 +45,12 @@ is done with directives::
 
 If you want to mark fields of an existing 3rd party behavior, it can be
 done using this utility function::
-    
+
     from plone.app.dexterity.behaviors.metadata import IBasic
     from collective.dexteritytextindexer.utils import searchable
 
     searchable(IBasic, 'title')
     searchable(IBasic, 'description')
-
-
-Don't forget to grok your package in your ``configure.zcml``::
-
-    <configure xmlns="http://namespaces.zope.org/zope"
-               xmlns:grok="http://namespaces.zope.org/grok">
-
-        <include package="five.grok" />
-        <grok:grok package="." />
-
-    </configure>
 
 
 Alternatively, if you specified your model as a plone.supermodel XML model,
@@ -101,18 +90,30 @@ Convert multi-adapter specification:
 Example::
 
     from collective.dexteritytextindexer.converters import DefaultDexterityTextIndexFieldConverter
-    from five import grok
+    from collective.dexteritytextindexer.interfaces import IDexterityTextIndexFieldConverter
     from my.package.interfaces import IMyFancyField
     from plone.dexterity.interfaces import IDexterityContent
     from z3c.form.interfaces import IWidget
+    from zope.component import adapts
+    from zope.interface import implements
 
     class CustomFieldConverter(DefaultDexterityTextIndexFieldConverter):
-        grok.adapts(IDexterityContent, IMyFancyField, IWidget)
+        implements(IDexterityTextIndexFieldConverter)
+        adapts(IDexterityContent, IMyFancyField, IWidget)
 
         def convert(self):
              # implement your custom converter
              # which returns a string at the end
              return ''
+
+ZCML::
+
+    <configure xmlns="http://namespaces.zope.org/zope">
+
+        <adapter factory=".converters.CustomFieldConverter" />
+
+    </configure>
+
 
 There is already an adapter for converting NamedFiles properly. It's registered
 only if `plone.namedfile` is installed.
@@ -126,13 +127,13 @@ Sometimes you need to extend the SearchableText with additional data which is
 not stored in a field. It's possible to register a named adapter which provides
 additional data::
 
-    from five import grok
     from collective import dexteritytextindexer
+    from zope.component import adapts
+    from zope.interface import implements
 
-    class MySearchableTextExtender(grok.Adapter):
-        grok.context(IMyBehavior)
-        grok.name('IMyBehavior')
-        grok.implements(dexteritytextindexer.IDynamicTextIndexExtender)
+    class MySearchableTextExtender(object):
+        adapts(IMyBehavior)
+        implements(dexteritytextindexer.IDynamicTextIndexExtender)
 
         def __init__(self, context):
             self.context = context
@@ -140,6 +141,17 @@ additional data::
         def __call__(self):
             """Extend the searchable text with a custom string"""
             return 'some more searchable words'
+
+
+ZCML::
+
+    <configure xmlns="http://namespaces.zope.org/zope">
+
+        <adapter factory=".indexer.MySearchableTextExtender"
+                 name="IMyBehavior"
+                 />
+
+    </configure>
 
 
 This is a **named** adapter! This makes it possible to register multiple

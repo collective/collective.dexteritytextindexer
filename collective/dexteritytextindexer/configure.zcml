@@ -1,5 +1,4 @@
 <configure xmlns="http://namespaces.zope.org/zope"
-           xmlns:grok="http://namespaces.zope.org/grok"
            xmlns:i18n="http://namespaces.zope.org/i18n"
            xmlns:plone="http://namespaces.plone.org/plone"
            xmlns:zcml="http://namespaces.zope.org/zcml"
@@ -7,11 +6,6 @@
 
     <include package="plone.behavior" file="meta.zcml" />
     <include package="plone.dexterity" />
-
-    <!-- grok it -->
-    <include package="five.grok" />
-    <include package="plone.supermodel" />
-    <grok:grok package="." />
 
     <!-- marker behavior for enabling indexer -->
     <plone:behavior

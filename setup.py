@@ -34,7 +34,6 @@ setup(name='collective.dexteritytextindexer',
       zip_safe=False,
       install_requires=[
         'setuptools',
-        'five.grok',
         'plone.indexer',
         'plone.behavior',
         'zope.interface',
