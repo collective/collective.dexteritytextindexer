@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.5.2 (unreleased)
-------------------
+2.0 (unreleased)
+----------------
 
 - Plone 4.3 support.
   [jone]
