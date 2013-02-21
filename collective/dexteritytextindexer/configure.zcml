@@ -5,9 +5,8 @@
            xmlns:zcml="http://namespaces.zope.org/zcml"
            i18n_domain="collective.dexteritytextindexer">
 
-    <!-- Include configuration for dependencies listed in setup.py -->
-    <include package="z3c.autoinclude" file="meta.zcml" />
-    <includeDependencies package="." />
+    <include package="plone.behavior" file="meta.zcml" />
+    <include package="plone.dexterity" />
 
     <!-- grok it -->
     <include package="five.grok" />
