@@ -1,23 +1,14 @@
-"""The ``searchable`` martian directive is used to mark a field as
-searchable within a schema interface.
-"""
-
-
-from plone.directives.form.schema import FormMetadataListStorage
+from plone.supermodel.directives import MetadataListDirective
 from zope.interface import Interface
 from zope.interface.interfaces import IInterface
-import martian
 
 
 SEARCHABLE_KEY = u'collective.dexteritytextindexer.searchable'
 
 
-class searchable(martian.Directive):
+class searchable(MetadataListDirective):
     """Directive used to mark a field as searchable.
     """
-
-    scope = martian.CLASS
-    store = FormMetadataListStorage()
 
     key = SEARCHABLE_KEY
     value = 'true'

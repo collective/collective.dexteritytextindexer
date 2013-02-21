@@ -7,10 +7,12 @@ converter only enabled when plone.namedfile is installed
 from Products.CMFCore.utils import getToolByName
 from ZODB.POSException import ConflictError
 from collective.dexteritytextindexer import interfaces
-from five import grok
 from plone.dexterity.interfaces import IDexterityContent
-from zope.schema.interfaces import IField, IInt
 from z3c.form.interfaces import IWidget
+from zope.component import adapts
+from zope.interface import implements
+from zope.schema.interfaces import IField
+from zope.schema.interfaces import IInt
 import logging
 
 
@@ -25,13 +27,13 @@ else:
 LOGGER = logging.getLogger('collective.dexteritytextindexer')
 
 
-class DefaultDexterityTextIndexFieldConverter(grok.MultiAdapter):
+class DefaultDexterityTextIndexFieldConverter(object):
     """Fallback field converter which uses the rendered widget in display
     mode for generating a indexable string.
     """
 
-    grok.provides(interfaces.IDexterityTextIndexFieldConverter)
-    grok.adapts(IDexterityContent, IField, IWidget)
+    implements(interfaces.IDexterityTextIndexFieldConverter)
+    adapts(IDexterityContent, IField, IWidget)
 
     def __init__(self, context, field, widget):
         """Initialize field converter"""
@@ -52,8 +54,8 @@ if HAS_NAMEDFILE:
         """Converts the file data of a named file using portal_transforms.
         """
 
-        grok.provides(interfaces.IDexterityTextIndexFieldConverter)
-        grok.adapts(IDexterityContent, INamedFileField, IWidget)
+        implements(interfaces.IDexterityTextIndexFieldConverter)
+        adapts(IDexterityContent, INamedFileField, IWidget)
 
         def convert(self):
             """Transforms file data to text for indexing safely.
@@ -96,8 +98,8 @@ if HAS_NAMEDFILE:
 class IntFieldConverter(DefaultDexterityTextIndexFieldConverter):
     """Converts the data of a int field"""
 
-    grok.provides(interfaces.IDexterityTextIndexFieldConverter)
-    grok.adapts(IDexterityContent, IInt, IWidget)
+    implements(interfaces.IDexterityTextIndexFieldConverter)
+    adapts(IDexterityContent, IInt, IWidget)
 
     def convert(self):
         """return the adapted field value"""
