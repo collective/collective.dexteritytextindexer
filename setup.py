@@ -4,11 +4,15 @@ import os
 version = '1.5.2.dev0'
 
 tests_require = [
-    'zope.testing',
-    'zope.schema',
+    'unittest2',
+    'elementtree',
+
+    'zope.configuration',
+
+    'plone.testing',
     'plone.app.testing',
     'plone.autoform',
-    'plone.testing',
+    'plone.directives.form',
     ]
 
 setup(name='collective.dexteritytextindexer',
@@ -39,15 +43,20 @@ setup(name='collective.dexteritytextindexer',
 
       install_requires=[
         'setuptools',
+
+        'ZODB3',
+        'zope.interface',
+        'zope.schema',
+        'zope.component',
+        'zope.deferredimport',
+        'z3c.form',
+
         'plone.indexer',
         'plone.behavior',
-        'zope.interface',
-        'plone.directives.form',
         'plone.dexterity',
         'plone.supermodel',
         'plone.z3cform',
-        'z3c.form',
-        'elementtree',
+        'Products.CMFCore',
         ],
 
       tests_require=tests_require,
