@@ -5,6 +5,9 @@ Changelog
 2.0 (unreleased)
 ----------------
 
+- Add a no_longer_searchable utility function.
+  [jone]
+
 - Plone 4.3 support.
   [jone]
 
