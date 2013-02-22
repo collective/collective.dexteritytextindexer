@@ -1,7 +1,6 @@
 Test everything with behaviors
 
     >>> from Products.CMFCore.utils import getToolByName
-    >>> from grokcore.component.testing import grok_component
     >>> from plone.app.testing import TEST_USER_NAME
     >>> from plone.app.testing import login
     >>> from plone.dexterity.fti import DexterityFTI
@@ -33,8 +32,6 @@ Helpers:
 First test it with a simple behavior:
 
     >>> from collective.dexteritytextindexer.tests.behaviors import ISimpleBehavior
-    >>> grok_component('ISimpleBehavior', ISimpleBehavior)
-    True
     >>> fti = DexterityFTI('SimpleFTI')
     >>> fti.behaviors = (
     ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
@@ -71,8 +68,6 @@ Test, if the value getter works also, when the request has stored another value 
 Does a list work?
 
     >>> from collective.dexteritytextindexer.tests.behaviors import IListBehavior
-    >>> grok_component('IListBehavior', IListBehavior)
-    True
     >>> fti = DexterityFTI('ListFTI')
     >>> fti.behaviors = (
     ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
@@ -95,8 +90,6 @@ Does a list work?
 Do ints work?
 
     >>> from collective.dexteritytextindexer.tests.behaviors import IIntBehavior
-    >>> grok_component('IIntBehavior', IIntBehavior)
-    True
     >>> fti = DexterityFTI('IntFTI')
     >>> fti.behaviors = (
     ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
@@ -112,7 +105,12 @@ Do ints work?
 
     >>> obj3
     <Item at /plone/intfti>
-    >>> getSearchableText(obj3)
+
+In Plone 4.3 int-values are stored as unicodes.
+Since our test should work also for old Plones, we convert everything
+to string here:
+
+    >>> map(str, getSearchableText(obj3))
     ['57']
 
 
@@ -121,8 +119,6 @@ When a schema marks a field as searchable which does not exist it should:
 - log an error
 
     >>> from collective.dexteritytextindexer.tests.behaviors import IMissingFieldBehavior
-    >>> grok_component('IMissingFieldBehavior', IMissingFieldBehavior)
-    True
     >>> fti = DexterityFTI('MissingFieldFTI')
     >>> fti.behaviors = (
     ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
@@ -148,8 +144,6 @@ Test, if a subclassed schema also inherits the searchable configuration of
 it's superclass:
 
     >>> from collective.dexteritytextindexer.tests.behaviors import IInheritedBehavior
-    >>> grok_component('IInheritedBehavior', IInheritedBehavior)
-    True
     >>> fti = DexterityFTI('InheritedFTI')
     >>> fti.behaviors = (
     ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',

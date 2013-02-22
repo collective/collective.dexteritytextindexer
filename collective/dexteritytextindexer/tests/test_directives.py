@@ -1,9 +1,5 @@
-"""Contains martian directive tests.
-"""
-
 from collective.dexteritytextindexer.directives import SEARCHABLE_KEY
 from collective.dexteritytextindexer.directives import searchable
-from grokcore.component.testing import grok, grok_component
 from plone.directives import form
 from plone.supermodel.utils import mergedTaggedValueList
 from zope import schema
@@ -13,14 +9,6 @@ import zope.component.testing
 
 
 class TestDirectives(unittest.TestCase):
-    """Test suite for testing the martian directive.
-    """
-
-    def setUp(self):
-        """After setting up, grok the meta module for enabling the
-        grokker.
-        """
-        grok('collective.dexteritytextindexer.meta')
 
     def tearDown(self):
         """Tear down the testing setup.
@@ -37,10 +25,6 @@ class TestDirectives(unittest.TestCase):
             """
             searchable('foo')
             foo = schema.TextLine(title=u'Foo')
-
-        self.assertEquals([], mergedTaggedValueList(IDummy, SEARCHABLE_KEY))
-
-        grok_component('IDummy', IDummy)
 
         self.assertEquals([(Interface, 'foo', 'true')],
                           mergedTaggedValueList(IDummy, SEARCHABLE_KEY))
@@ -59,12 +43,6 @@ class TestDirectives(unittest.TestCase):
         class IBar(IFoo):
             """Schema class which inherits a field from IFoo.
             """
-
-        self.assertEquals([], mergedTaggedValueList(IFoo, SEARCHABLE_KEY))
-        self.assertEquals([], mergedTaggedValueList(IBar, SEARCHABLE_KEY))
-
-        grok_component('IFoo', IFoo)
-        grok_component('IBar', IBar)
 
         self.assertEquals([(Interface, 'baz', 'true')],
                           mergedTaggedValueList(IFoo, SEARCHABLE_KEY))

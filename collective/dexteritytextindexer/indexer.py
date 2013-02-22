@@ -4,7 +4,6 @@
 from collective.dexteritytextindexer import interfaces
 from collective.dexteritytextindexer.behavior import IDexterityTextIndexer
 from collective.dexteritytextindexer.directives import SEARCHABLE_KEY
-from five import grok
 from plone.dexterity.utils import iterSchemata
 from plone.indexer import indexer
 from plone.supermodel.utils import mergedTaggedValueList
@@ -104,10 +103,6 @@ def dynamic_searchable_text_indexer(obj):
         indexed.append(extended_value)
 
     return ' '.join(indexed)
-
-
-grok.global_adapter(dynamic_searchable_text_indexer,
-                    name='SearchableText')
 
 
 def get_field_widget(obj, field):
