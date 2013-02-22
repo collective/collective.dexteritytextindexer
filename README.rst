@@ -46,12 +46,19 @@ is done with directives::
 If you want to mark fields of an existing 3rd party behavior, it can be
 done using this utility function::
 
-    from plone.app.dexterity.behaviors.metadata import IBasic
+    from plone.app.dexterity.behaviors.metadata import ICategorization
     from collective.dexteritytextindexer.utils import searchable
 
-    searchable(IBasic, 'title')
-    searchable(IBasic, 'description')
+    searchable(ICategorization, 'categorization')
 
+The `title` and `description` on `plone.app.dexterity`'s `IBasic` behavior
+are marked as searchable by default.
+For marking them as no longer searchable, there is a utility function::
+
+    from plone.app.dexterity.behaviors.metadata import IBasic
+    from collective.dexteritytextindexer.utils import no_longer_searchable
+
+    no_longer_searchable(IBasic, 'title')
 
 Alternatively, if you specified your model as a plone.supermodel XML model,
 you can mark the field searchable that way::
