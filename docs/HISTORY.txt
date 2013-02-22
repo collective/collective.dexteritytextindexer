@@ -5,6 +5,10 @@ Changelog
 2.0 (unreleased)
 ----------------
 
+- Mark title and description of p.a.dexterity's IBasic
+  as searchable by default.
+  [jone]
+
 - Add a no_longer_searchable utility function.
   [jone]
 
