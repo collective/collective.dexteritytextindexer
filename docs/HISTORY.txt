@@ -5,6 +5,9 @@ Changelog
 2.0 (unreleased)
 ----------------
 
+- Drop Plone 4.1 support.
+  [jone]
+
 - Mark title and description of p.a.dexterity's IBasic
   as searchable by default.
   [jone]
