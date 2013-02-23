@@ -25,9 +25,11 @@ setup(name='collective.dexteritytextindexer',
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Framework :: Plone",
-        "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules",
+        'Programming Language :: Python',
+        'Framework :: Plone',
+        'Framework :: Plone :: 4.2',
+        'Framework :: Plone :: 4.3',
+        'Topic :: Software Development :: Libraries :: Python Modules',
         ],
 
       keywords='plone dexterity searchable text indexer',
