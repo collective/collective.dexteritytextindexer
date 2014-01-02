@@ -45,6 +45,8 @@ class DefaultDexterityTextIndexFieldConverter(object):
         """Convert the adapted field value to text/plain for indexing"""
         html = self.widget.render().strip()
         transforms = getToolByName(self.context, 'portal_transforms')
+        if isinstance(html, unicode):
+            html = html.encode('utf-8')
         stream = transforms.convertTo('text/plain', html, mimetype='text/html')
         return stream.getData().strip()
 
