@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-2.1 (unreleased)
-----------------
+2.0.1 (2014-01-02)
+------------------
 
 - Fix encoding error when transforming HTML to text.
   [jone]
