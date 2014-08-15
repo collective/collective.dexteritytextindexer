@@ -38,4 +38,19 @@
         factory="collective.dexteritytextindexer.converters.IntFieldConverter"
         />
 
+    <!-- plone.schemaeditor adapter -->
+    <adapter
+        provides="plone.schemaeditor.interfaces.IFieldEditorExtender"
+        for="plone.schemaeditor.interfaces.ISchemaContext
+             zope.schema.interfaces.IField"
+        name="plone.schemaeditor.searchabletext"
+        factory=".schemaeditor.get_searchabletext_schema"
+        />
+
+    <adapter
+        provides=".schemaeditor.ISearchableTextField"
+        for="zope.schema.interfaces.IField"
+        factory=".schemaeditor.SearchableTextField"
+        />
+
 </configure>
