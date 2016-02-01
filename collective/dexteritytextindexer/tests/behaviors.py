@@ -3,12 +3,12 @@
 
 from collective import dexteritytextindexer
 from plone.autoform.interfaces import IFormFieldProvider
-from plone.directives import form
+from plone.supermodel import model
 from zope import schema
 from zope.interface import alsoProvides
 
 
-class ISimpleBehavior(form.Schema):
+class ISimpleBehavior(model.Schema):
     """Simple behavior containing simple text line fields.
     """
 
@@ -21,7 +21,7 @@ class ISimpleBehavior(form.Schema):
 alsoProvides(ISimpleBehavior, IFormFieldProvider)
 
 
-class IListBehavior(form.Schema):
+class IListBehavior(model.Schema):
     """More advanced behavior with a list of fields.
     """
 
@@ -35,7 +35,7 @@ class IListBehavior(form.Schema):
 alsoProvides(IListBehavior, IFormFieldProvider)
 
 
-class IIntBehavior(form.Schema):
+class IIntBehavior(model.Schema):
     """Basic behavior with a integer field.
     """
 
@@ -54,7 +54,7 @@ class IInheritedBehavior(ISimpleBehavior):
 alsoProvides(IInheritedBehavior, IFormFieldProvider)
 
 
-class IMissingFieldBehavior(form.Schema):
+class IMissingFieldBehavior(model.Schema):
     """A behavior defining a field as searchable which does not exist.
     """
 

@@ -1,21 +1,21 @@
 from collective.dexteritytextindexer.tests.helpers import get_searchable_fields
 from collective.dexteritytextindexer.utils import no_longer_searchable
 from collective.dexteritytextindexer.utils import searchable
-from plone.directives import form
+from plone.supermodel import model
 from unittest2 import TestCase
 from zope import schema
 
 
-class IExample(form.Schema):
+class IExample(model.Schema):
 
     foo = schema.TextLine(title=u'foo')
 
 
-class IBar(form.Schema):
+class IBar(model.Schema):
     pass
 
 
-class IBaz(form.Schema):
+class IBaz(model.Schema):
     baz = schema.TextLine(title=u'baz')
 
 

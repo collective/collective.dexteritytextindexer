@@ -1,6 +1,6 @@
 from collective.dexteritytextindexer.directives import SEARCHABLE_KEY
 from collective.dexteritytextindexer.directives import searchable
-from plone.directives import form
+from plone.supermodel import model
 from plone.supermodel.utils import mergedTaggedValueList
 from zope import schema
 from zope.interface import Interface
@@ -20,7 +20,7 @@ class TestDirectives(unittest.TestCase):
         values.
         """
 
-        class IDummy(form.Schema):
+        class IDummy(model.Schema):
             """Dummy schema class.
             """
             searchable('foo')
@@ -34,7 +34,7 @@ class TestDirectives(unittest.TestCase):
         inherited from its superclass.
         """
 
-        class IFoo(form.Schema):
+        class IFoo(model.Schema):
             """Class with a searchable field
             """
             searchable('baz')
