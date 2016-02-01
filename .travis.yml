@@ -1,0 +1,19 @@
+language: python
+python: 2.7
+sudo: false
+cache:
+  directories:
+  - eggs
+  - parts/node
+env:
+- PLONE_VERSION=4
+- PLONE_VERSION=5
+matrix:
+  fast_finish: true
+install:
+- cp plone$PLONE_VERSION.cfg buildout.cfg
+- python bootstrap.py
+- bin/buildout annotate
+- bin/buildout -Nq
+script:
+- bin/test

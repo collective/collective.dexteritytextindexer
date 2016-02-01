@@ -5,7 +5,6 @@ version = '2.0.2.dev0'
 
 tests_require = [
     'unittest2',
-    'elementtree',
 
     'zope.configuration',
 
