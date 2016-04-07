@@ -5,7 +5,9 @@ Changelog
 2.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Handle indexing from scripts.
+  Fixes https://github.com/collective/collective.dexteritytextindexer/issues/12
+  [gforcada]
 
 
 2.0.1 (2014-01-02)
