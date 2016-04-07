@@ -15,6 +15,7 @@ from zope import schema
 from zope.component import getAdapters, getMultiAdapter
 from zope.interface import alsoProvides
 import logging
+from zope.globalrequest import getRequest
 
 
 LOGGER = logging.getLogger('collective.dexteritytextindexer')
@@ -33,12 +34,18 @@ class FakeView(object):
 def dynamic_searchable_text_indexer(obj):
     """Dynamic searchable text indexer.
     """
+    # if the object does not provide a request, get one.
+    # This happens when running scripts (bin/instance run script.py)
+    try:
+        request = obj.REQUEST
+    except AttributeError:
+        request = getRequest()
 
     # We need to make sure that we have z2 mode switched on for z3c form.
     # Since we do not really have any view to do this on, we just use
     # a fake view. For switching z2 mode on, it's only necessary that
     # there is a view.request.
-    view = FakeView(obj, obj.REQUEST)
+    view = FakeView(obj, request)
     z2.switch_on(view, request_layer=IFormLayer)
 
     indexed = []
@@ -53,7 +60,7 @@ def dynamic_searchable_text_indexer(obj):
 
             # get the widget
             try:
-                widget = get_field_widget(obj, form_field)
+                widget = get_field_widget(obj, form_field, request)
             except TypeError:
                 # Some times the field value is wrong, then the converter
                 # failes. We should not fail, so we catch this error.
@@ -105,7 +112,7 @@ def dynamic_searchable_text_indexer(obj):
     return ' '.join(indexed)
 
 
-def get_field_widget(obj, field):
+def get_field_widget(obj, field, request):
     """Returns the field widget of a field in display mode without
     touching any form.
     The `field` should be a z3c form field, not a zope schema field.
@@ -115,10 +122,10 @@ def get_field_widget(obj, field):
 
     if field.widgetFactory.get(DISPLAY_MODE) is not None:
         factory = field.widgetFactory.get(DISPLAY_MODE)
-        widget = factory(field.field, obj.REQUEST)
+        widget = factory(field.field, request)
     else:
         widget = getMultiAdapter(
-            (field.field, obj.REQUEST), IFieldWidget)
+            (field.field, request), IFieldWidget)
     widget.name = '' + field.__name__  # prefix not needed
     widget.id = widget.name.replace('.', '-')
     widget.context = obj
