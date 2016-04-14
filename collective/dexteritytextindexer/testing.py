@@ -2,9 +2,11 @@
 TextIndexerLayer                   basic text indexer layer
 TEXT_INDEXER_FIXTURE               text indexer fixture
 TEXT_INTEXER_INTEGRATION_TESTING   integration testing layer
+TEXT_INDEXER_FUNCTIONAL_TESTING    functional testing layer
 """
 
 from StringIO import StringIO
+from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
@@ -59,3 +61,22 @@ TEXT_INDEXER_FIXTURE = TextIndexerLayer()
 TEXT_INTEXER_INTEGRATION_TESTING = IntegrationTesting(
     bases=(TEXT_INDEXER_FIXTURE,),
     name="collective.dexteritytextindexer:Integration")
+
+
+class TextIndexerFunctionalLayer(PloneSandboxLayer):
+
+    defaultBases = (TEXT_INDEXER_FIXTURE,)
+
+    def setUpZope(self, app, configurationContext):
+        import plone.app.dexterity
+        xmlconfig.file('configure.zcml', plone.app.dexterity,
+                       context=configurationContext)
+
+    def setUpPloneSite(self, portal):
+        self.applyProfile(portal, 'plone.app.dexterity:default')
+
+TEXT_INDEXER_FUNCTIONAL_FIXTURE = TextIndexerFunctionalLayer()
+
+TEXT_INDEXER_FUNCTIONAL_TESTING = FunctionalTesting(
+        bases=(TEXT_INDEXER_FUNCTIONAL_FIXTURE,),
+        name="collective.dexteritytextindexer:Functional")

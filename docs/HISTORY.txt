@@ -5,7 +5,8 @@ Changelog
 2.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add schemaeditor support
+  [datakurre]
 
 
 2.0.2 (2016-04-07)
