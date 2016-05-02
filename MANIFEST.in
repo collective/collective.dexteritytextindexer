@@ -9,4 +9,3 @@ recursive-exclude bin *
 recursive-exclude develop-eggs *
 recursive-exclude parts *
 recursive-include collective *
-recursive-include docs *
