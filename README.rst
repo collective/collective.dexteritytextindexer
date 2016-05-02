@@ -32,11 +32,11 @@ is done with directives::
 
     from collective import dexteritytextindexer
     from plone.autoform.interfaces import IFormFieldProvider
-    from plone.directives import form
+    from plone.supermodel.model import Schema
     from zope import schema
     from zope.interface import alsoProvides
 
-    class IMyBehavior(form.Schema):
+    class IMyBehavior(Schema):
 
         dexteritytextindexer.searchable('specialfield')
         specialfield = schema.TextField(title=u'Special field')
@@ -65,7 +65,7 @@ you can mark the field searchable that way::
 
     <model xmlns="http://namespaces.plone.org/supermodel/schema"
            xmlns:indexer="http://namespaces.plone.org/supermodel/indexer">
-      <schema based-on="plone.directives.form.schema.Schema">
+      <schema based-on="plone.supermodel.model.Schema">
 
           <field name="specialfield" type="zope.schema.TextLine"
                  indexer:searchable="true">

@@ -10,7 +10,6 @@ tests_require = [
     'plone.testing',
     'plone.app.testing',
     'plone.autoform',
-    'plone.directives.form',
     ]
 
 setup(name='collective.dexteritytextindexer',
