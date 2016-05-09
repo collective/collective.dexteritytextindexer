@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-import os
 
 version = '2.1.1.dev0'
 
@@ -18,8 +17,8 @@ setup(name='collective.dexteritytextindexer',
       version=version,
       description="Dynamic SearchableText index for dexterity content types",
 
-      long_description=open("README.rst").read() + "\n" + \
-          open(os.path.join("docs", "HISTORY.txt")).read(),
+      long_description=open("README.rst").read() + "\n" +
+                       open("CHANGES.rst").read(),
 
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
