@@ -5,8 +5,8 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Remove traces of plone.directives.form (which implicitly added grok as a dependency).
+  [gforcada]
 
 2.1.0 (2016-04-14)
 ------------------
