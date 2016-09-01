@@ -8,6 +8,9 @@ Changelog
 - Remove traces of plone.directives.form (which implicitly added grok as a dependency).
   [gforcada]
 
+- Silent a plone.behavior warning.
+  [gforcada]
+
 2.1.0 (2016-04-14)
 ------------------
 
