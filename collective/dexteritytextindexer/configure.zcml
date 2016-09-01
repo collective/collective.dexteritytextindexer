@@ -12,7 +12,6 @@
           title="Dynamic SearchableText indexer behavior"
           description="Enables the dynamic SearchableText indexer for a content type"
           provides="collective.dexteritytextindexer.behavior.IDexterityTextIndexer"
-          for="plone.dexterity.interfaces.IDexterityContent"
           />
 
     <utility
