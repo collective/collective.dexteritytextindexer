@@ -11,6 +11,10 @@ Changelog
 - Silent a plone.behavior warning.
   [gforcada]
 
+- Specify compatibility in setup.py for versions which are tested and remove
+  unittest2 dependency
+  [tomgross]
+
 2.1.0 (2016-04-14)
 ------------------
 

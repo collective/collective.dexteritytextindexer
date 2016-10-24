@@ -1,6 +1,6 @@
 from collective.dexteritytextindexer.tests.helpers import get_searchable_fields
 from plone.app.dexterity.behaviors.metadata import IBasic
-from unittest2 import TestCase
+from unittest import TestCase
 
 
 class TestBasicBehaviorIsSearchable(TestCase):

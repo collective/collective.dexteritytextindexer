@@ -1,7 +1,7 @@
 """Containing a tests suite for testing the behaviors.
 """
 
-import unittest2 as unittest
+import unittest as unittest
 import doctest
 from plone.testing import layered
 from collective.dexteritytextindexer import testing
