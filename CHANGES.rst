@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.1.1 (unreleased)
+2.1.1 (2016-11-03)
 ------------------
 
 - Remove traces of plone.directives.form (which implicitly added grok as a dependency).
