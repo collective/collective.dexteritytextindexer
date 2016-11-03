@@ -2,7 +2,7 @@ from collective.dexteritytextindexer.tests.helpers import get_searchable_fields
 from collective.dexteritytextindexer.utils import no_longer_searchable
 from collective.dexteritytextindexer.utils import searchable
 from plone.supermodel import model
-from unittest2 import TestCase
+from unittest import TestCase
 from zope import schema
 
 
