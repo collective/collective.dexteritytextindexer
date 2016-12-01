@@ -13,6 +13,7 @@ from zope.component import adapts
 from zope.interface import implements
 from zope.schema.interfaces import IField
 from zope.schema.interfaces import IInt
+from zope.schema.interfaces import ITuple
 import logging
 
 
@@ -102,6 +103,18 @@ class IntFieldConverter(DefaultDexterityTextIndexFieldConverter):
 
     implements(interfaces.IDexterityTextIndexFieldConverter)
     adapts(IDexterityContent, IInt, IWidget)
+
+    def convert(self):
+        """return the adapted field value"""
+        storage = self.field.interface(self.context)
+        value = self.field.get(storage)
+        return str(value)
+
+class TupleFieldConverter(DefaultDexterityTextIndexFieldConverter):
+    """Converts the data of a tuple field"""
+
+    implements(interfaces.IDexterityTextIndexFieldConverter)
+    adapts(IDexterityContent, ITuple, IWidget)
 
     def convert(self):
         """return the adapted field value"""

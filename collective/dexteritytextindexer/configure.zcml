@@ -37,6 +37,10 @@
         factory="collective.dexteritytextindexer.converters.IntFieldConverter"
         />
 
+    <adapter
+        factory="collective.dexteritytextindexer.converters.TupleFieldConverter"
+        />
+        
     <!-- plone.schemaeditor adapter -->
     <adapter
         provides="plone.schemaeditor.interfaces.IFieldEditorExtender"
