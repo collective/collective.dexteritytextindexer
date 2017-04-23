@@ -5,7 +5,8 @@ Changelog
 2.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added TupleFieldConverter, to enable indexing of portal catalog KeywordIndex indices.
+  [jone, mtrebron]
 
 
 2.1.1 (2016-11-03)
