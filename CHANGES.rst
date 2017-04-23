@@ -5,6 +5,9 @@ Changelog
 2.1.2 (unreleased)
 ------------------
 
+- Added TupleFieldConverter, to enable indexing of portal catalog KeywordIndex indices.
+  [jone, mtrebron, maurits]
+
 - Improved code quality.  [maurits]
 
 - Add the ability to index a RichText field. Fixes #23.
