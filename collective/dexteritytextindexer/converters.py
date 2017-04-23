@@ -150,5 +150,12 @@ class TupleFieldConverter(DefaultDexterityTextIndexFieldConverter):
     def convert(self):
         """return the adapted field value"""
         storage = self.field.interface(self.context)
-        value = self.field.get(storage)
-        return str(value)
+        result = []
+        for value in self.field.get(storage):
+            if isinstance(value, unicode):
+                result.append(value)
+            elif isinstance(value, str):
+                result.append(value.decode('utf-8'))
+            else:
+                result.append(unicode(value))
+        return u' '.join(result)
