@@ -24,6 +24,13 @@
           />
 
     <plone:behavior
+          title="richtext behavior"
+          description=""
+          provides=".behaviors.IRichTextBehavior"
+          for="plone.dexterity.interfaces.IDexterityContent"
+          />
+
+    <plone:behavior
           title="inherited behavior"
           description=""
           provides=".behaviors.IInheritedBehavior"

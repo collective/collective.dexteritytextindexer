@@ -121,6 +121,39 @@ to string here::
     ['57']
 
 
+Do rich-text fields work?
+
+    >>> from collective.dexteritytextindexer.tests.behaviors import IRichTextBehavior
+    >>> from plone.app.textfield.value import RichTextValue
+    >>> fti = DexterityFTI('RichTextFTI')
+    >>> fti.behaviors = (
+    ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
+    ...     'collective.dexteritytextindexer.tests.behaviors.IRichTextBehavior',
+    ... )
+    >>> portal.portal_types._setObject('RichTextFTI', fti)
+    'RichTextFTI'
+    >>> schema = fti.lookupSchema()
+
+    >>> rtv = RichTextValue(
+    ...     raw='<p>In for an <em>inch</em>, in for a <strong>pound.</strong></p>',
+    ...     mimeType='text/html',
+    ...     outputMimeType='text/html',
+    ...     encoding='utf-8',
+    ... )
+    >>> obj4 = createContentInContainer(
+    ...    portal,
+    ...    'RichTextFTI',
+    ...    checkContstraints=False,
+    ...    richtext_field=rtv,
+    ... )
+
+    >>> obj4
+    <Item at /plone/richtextfti>
+
+    >>> getSearchableText(obj4)
+    ['in', 'for', 'an', 'inch', 'in', 'for', 'a', 'pound']
+
+
 When a schema marks a field as searchable which does not exist it should:
 
 - not break indexing other fields
