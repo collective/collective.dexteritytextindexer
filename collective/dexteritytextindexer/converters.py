@@ -8,10 +8,11 @@ converter only enabled when plone.namedfile is installed
 from collective.dexteritytextindexer import interfaces
 from plone.dexterity.interfaces import IDexterityContent
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import safe_unicode
 from z3c.form.interfaces import IWidget
 from ZODB.POSException import ConflictError
-from zope.component import adapts
-from zope.interface import implements
+from zope.component import adapter
+from zope.interface import implementer
 from zope.schema.interfaces import IField
 from zope.schema.interfaces import IInt
 
@@ -25,17 +26,23 @@ except ImportError:
 else:
     HAS_NAMEDFILE = True
 
+try:
+    from plone.app.textfield.interfaces import IRichText
+except ImportError:
+    HAS_RICHTEXT = False
+else:
+    HAS_RICHTEXT = True
+
 
 LOGGER = logging.getLogger('collective.dexteritytextindexer')
 
 
+@implementer(interfaces.IDexterityTextIndexFieldConverter)
+@adapter(IDexterityContent, IField, IWidget)
 class DefaultDexterityTextIndexFieldConverter(object):
     """Fallback field converter which uses the rendered widget in display
     mode for generating a indexable string.
     """
-
-    implements(interfaces.IDexterityTextIndexFieldConverter)
-    adapts(IDexterityContent, IField, IWidget)
 
     def __init__(self, context, field, widget):
         """Initialize field converter"""
@@ -53,13 +60,36 @@ class DefaultDexterityTextIndexFieldConverter(object):
         return stream.getData().strip()
 
 
+if HAS_RICHTEXT:
+    @implementer(interfaces.IDexterityTextIndexFieldConverter)
+    @adapter(IDexterityContent, IRichText, IWidget)
+    class DexterityRichTextIndexFieldConverter(object):
+        """Fallback field converter which uses the rendered widget in display
+        mode for generating a indexable string.
+        """
+
+        def __init__(self, context, field, widget):
+            """Initialize field converter"""
+            self.context = context
+            self.field = field
+
+        def convert(self):
+            """Convert a rich text field value to text/plain for indexing"""
+            textvalue = self.field.get(self.context)
+            transforms = getToolByName(self.context, 'portal_transforms')
+            return transforms.convertTo(
+                'text/plain',
+                safe_unicode(textvalue.output).encode('utf8'),
+                mimetype=textvalue.mimeType,
+            ).getData().strip()
+
+
 if HAS_NAMEDFILE:
+    @implementer(interfaces.IDexterityTextIndexFieldConverter)
+    @adapter(IDexterityContent, INamedFileField, IWidget)
     class NamedfileFieldConverter(DefaultDexterityTextIndexFieldConverter):
         """Converts the file data of a named file using portal_transforms.
         """
-
-        implements(interfaces.IDexterityTextIndexFieldConverter)
-        adapts(IDexterityContent, INamedFileField, IWidget)
 
         def convert(self):
             """Transforms file data to text for indexing safely.
@@ -99,11 +129,10 @@ if HAS_NAMEDFILE:
                              'to "text/plain": %s' % str(e))
 
 
+@implementer(interfaces.IDexterityTextIndexFieldConverter)
+@adapter(IDexterityContent, IInt, IWidget)
 class IntFieldConverter(DefaultDexterityTextIndexFieldConverter):
     """Converts the data of a int field"""
-
-    implements(interfaces.IDexterityTextIndexFieldConverter)
-    adapts(IDexterityContent, IInt, IWidget)
 
     def convert(self):
         """return the adapted field value"""

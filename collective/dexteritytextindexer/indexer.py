@@ -98,7 +98,8 @@ def dynamic_searchable_text_indexer(obj):
     # after converting all fields, run additional
     # IDynamicTextIndexExtender adapters.
     for _name, adapter in getAdapters(
-        (obj,), interfaces.IDynamicTextIndexExtender):
+        (obj,), interfaces.IDynamicTextIndexExtender
+    ):
         extended_value = adapter()
 
         # if no value was returned, we don't need to index anything.
