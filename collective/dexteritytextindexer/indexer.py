@@ -9,13 +9,18 @@ from plone.indexer import indexer
 from plone.supermodel.utils import mergedTaggedValueList
 from plone.z3cform import z2
 from z3c.form.field import Field
-from z3c.form.interfaces import DISPLAY_MODE, IFieldWidget
-from z3c.form.interfaces import IContextAware, IFormLayer, IField
+from z3c.form.interfaces import DISPLAY_MODE
+from z3c.form.interfaces import IContextAware
+from z3c.form.interfaces import IField
+from z3c.form.interfaces import IFieldWidget
+from z3c.form.interfaces import IFormLayer
 from zope import schema
-from zope.component import getAdapters, getMultiAdapter
-from zope.interface import alsoProvides
-import logging
+from zope.component import getAdapters
+from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
+from zope.interface import alsoProvides
+
+import logging
 
 
 LOGGER = logging.getLogger('collective.dexteritytextindexer')

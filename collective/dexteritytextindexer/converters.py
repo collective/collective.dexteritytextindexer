@@ -4,15 +4,16 @@ NamedfileFieldConverter                    an optional namedfile field
 converter only enabled when plone.namedfile is installed
 """
 
-from Products.CMFCore.utils import getToolByName
-from ZODB.POSException import ConflictError
 from collective.dexteritytextindexer import interfaces
 from plone.dexterity.interfaces import IDexterityContent
+from Products.CMFCore.utils import getToolByName
 from z3c.form.interfaces import IWidget
+from ZODB.POSException import ConflictError
 from zope.component import adapts
 from zope.interface import implements
 from zope.schema.interfaces import IField
 from zope.schema.interfaces import IInt
+
 import logging
 
 

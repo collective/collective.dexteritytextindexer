@@ -1,10 +1,11 @@
 """Containing a tests suite for testing the behaviors.
 """
 
-import unittest as unittest
-import doctest
-from plone.testing import layered
 from collective.dexteritytextindexer import testing
+from plone.testing import layered
+
+import doctest
+import unittest as unittest
 
 
 def test_suite():

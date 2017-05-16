@@ -1,8 +1,9 @@
 from collective.dexteritytextindexer.directives import SEARCHABLE_KEY
 from collective.dexteritytextindexer.supermodel import IndexerSchema
-from xml.etree import ElementTree
 from plone.supermodel.utils import ns
+from xml.etree import ElementTree
 from zope.interface import Interface
+
 import unittest
 import zope.schema
 

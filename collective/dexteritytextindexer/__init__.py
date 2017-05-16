@@ -3,7 +3,9 @@
 
 from collective.dexteritytextindexer import utils
 from plone.app.dexterity.behaviors.metadata import IBasic
+
 import zope.deferredimport
+
 
 zope.deferredimport.defineFrom(
     'collective.dexteritytextindexer.interfaces',

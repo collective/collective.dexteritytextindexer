@@ -1,11 +1,12 @@
-from Products.CMFCore.utils import getToolByName
 from collective.dexteritytextindexer.testing import TEXT_INDEXER_FUNCTIONAL_TESTING  # noqa
+from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import TEST_USER_PASSWORD
-from plone.app.testing import setRoles
 from plone.dexterity.fti import DexterityFTI
 from plone.testing.z2 import Browser
+from Products.CMFCore.utils import getToolByName
+
 import transaction
 import unittest
 
