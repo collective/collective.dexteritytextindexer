@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from plone.supermodel.directives import MetadataListDirective
 from zope.interface import Interface
 from zope.interface.interfaces import IInterface

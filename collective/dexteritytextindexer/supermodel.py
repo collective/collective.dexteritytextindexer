@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from collective.dexteritytextindexer.directives import SEARCHABLE_KEY
 from collective.dexteritytextindexer.interfaces import INDEXER_NAMESPACE
 from collective.dexteritytextindexer.interfaces import INDEXER_PREFIX
@@ -32,7 +33,7 @@ class IndexerSchema(object):
     def write(self, fieldNode, schema, field):
         name = field.__name__
         searchable = schema.queryTaggedValue(SEARCHABLE_KEY, [])
-        field_names = [field[1] for field in searchable]
+        field_names = [fld[1] for fld in searchable]
 
         if name in field_names:
             fieldNode.set(ns('searchable', self.namespace), 'true')

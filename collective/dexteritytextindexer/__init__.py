@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Dynamic SearchableText index for dexterity content types
 """
 

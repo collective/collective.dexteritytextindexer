@@ -1,13 +1,14 @@
+# -*- coding: utf-8 -*-
 """Contains different behaviors needed for testing.
 """
-
 from collective import dexteritytextindexer
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
 from zope import schema
-from zope.interface import alsoProvides
+from zope.interface import provider
 
 
+@provider(IFormFieldProvider)
 class ISimpleBehavior(model.Schema):
     """Simple behavior containing simple text line fields.
     """
@@ -18,9 +19,7 @@ class ISimpleBehavior(model.Schema):
     bar = schema.TextLine(title=u'Bar')
 
 
-alsoProvides(ISimpleBehavior, IFormFieldProvider)
-
-
+@provider(IFormFieldProvider)
 class IListBehavior(model.Schema):
     """More advanced behavior with a list of fields.
     """
@@ -28,13 +27,12 @@ class IListBehavior(model.Schema):
     dexteritytextindexer.searchable('list_field')
 
     list_field = schema.List(
-         title=u'List field',
-         value_type=schema.TextLine())
+        title=u'List field',
+        value_type=schema.TextLine()
+    )
 
 
-alsoProvides(IListBehavior, IFormFieldProvider)
-
-
+@provider(IFormFieldProvider)
 class IIntBehavior(model.Schema):
     """Basic behavior with a integer field.
     """
@@ -43,17 +41,13 @@ class IIntBehavior(model.Schema):
     int_field = schema.Int(title=u'Int')
 
 
-alsoProvides(IIntBehavior, IFormFieldProvider)
-
-
+@provider(IFormFieldProvider)
 class IInheritedBehavior(ISimpleBehavior):
     """Behavior extending from ISimpleBehavior for testing inheritance.
     """
 
 
-alsoProvides(IInheritedBehavior, IFormFieldProvider)
-
-
+@provider(IFormFieldProvider)
 class IMissingFieldBehavior(model.Schema):
     """A behavior defining a field as searchable which does not exist.
     """
@@ -62,6 +56,3 @@ class IMissingFieldBehavior(model.Schema):
     foo = schema.TextLine(title=u'Foo')
 
     dexteritytextindexer.searchable('bar')
-
-
-alsoProvides(IMissingFieldBehavior, IFormFieldProvider)

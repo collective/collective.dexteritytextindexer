@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Testing setup providing layers and fixtures
 TextIndexerLayer                   basic text indexer layer
 TEXT_INDEXER_FIXTURE               text indexer fixture
@@ -76,8 +77,10 @@ class TextIndexerFunctionalLayer(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, 'plone.app.dexterity:default')
 
+
 TEXT_INDEXER_FUNCTIONAL_FIXTURE = TextIndexerFunctionalLayer()
 
 TEXT_INDEXER_FUNCTIONAL_TESTING = FunctionalTesting(
-        bases=(TEXT_INDEXER_FUNCTIONAL_FIXTURE,),
-        name="collective.dexteritytextindexer:Functional")
+    bases=(TEXT_INDEXER_FUNCTIONAL_FIXTURE,),
+    name="collective.dexteritytextindexer:Functional"
+)

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from collective.dexteritytextindexer.directives import searchable
 from collective.dexteritytextindexer.directives import SEARCHABLE_KEY
 from plone.supermodel import model

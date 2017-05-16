@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from collective.dexteritytextindexer.tests.helpers import get_searchable_fields
 from collective.dexteritytextindexer.utils import no_longer_searchable
 from collective.dexteritytextindexer.utils import searchable

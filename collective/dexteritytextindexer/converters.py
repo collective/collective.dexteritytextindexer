@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 DefaultDexterityTextIndexFieldConverter    the default field converter
 NamedfileFieldConverter                    an optional namedfile field

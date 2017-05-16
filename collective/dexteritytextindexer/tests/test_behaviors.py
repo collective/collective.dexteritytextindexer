@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Containing a tests suite for testing the behaviors.
 """
 
@@ -13,7 +14,7 @@ def test_suite():
     """
     suite = unittest.TestSuite()
     suite.addTests([
-        layered(doctest.DocFileSuite('behaviors.txt'),
+        layered(doctest.DocFileSuite('behaviors.rst'),
                 layer=testing.TEXT_INTEXER_INTEGRATION_TESTING),
     ])
     return suite

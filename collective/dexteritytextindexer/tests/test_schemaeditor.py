@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from collective.dexteritytextindexer.testing import TEXT_INDEXER_FUNCTIONAL_TESTING  # noqa
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID

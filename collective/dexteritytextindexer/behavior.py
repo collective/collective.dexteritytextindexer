@@ -1,8 +1,7 @@
+# -*- coding: utf-8 -*-
 """IDexterityTextIndexer    dexterity behavior interface for enabling
 the dexteritytextindexer
 """
-
-
 from zope.interface import Interface
 
 

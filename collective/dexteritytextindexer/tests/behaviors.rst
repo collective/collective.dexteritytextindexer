@@ -1,4 +1,4 @@
-Test everything with behaviors
+Test everything with behaviors::
 
     >>> from Products.CMFCore.utils import getToolByName
     >>> from plone.app.testing import TEST_USER_NAME
@@ -10,7 +10,7 @@ Test everything with behaviors
     >>> login(portal, TEST_USER_NAME)
 
 
-Helpers:
+Helpers::
 
     >>> def obj2brain(obj):
     ...     catalog = getToolByName(obj, 'portal_catalog')
@@ -29,7 +29,7 @@ Helpers:
     ...     return data['SearchableText']
 
 
-First test it with a simple behavior:
+First test it with a simple behavior::
 
     >>> from collective.dexteritytextindexer.tests.behaviors import ISimpleBehavior
     >>> fti = DexterityFTI('SimpleFTI')
@@ -52,6 +52,9 @@ First test it with a simple behavior:
 
 
 Test, if the value getter works also, when the request has stored another value for this field.
+
+::
+
     >>> schema = fti.lookupSchema()
 
     >>> portal.REQUEST.form['foo'] = 'blubb'
@@ -66,6 +69,8 @@ Test, if the value getter works also, when the request has stored another value 
 
 
 Does a list work?
+
+::
 
     >>> from collective.dexteritytextindexer.tests.behaviors import IListBehavior
     >>> fti = DexterityFTI('ListFTI')
@@ -89,6 +94,8 @@ Does a list work?
 
 Do ints work?
 
+::
+
     >>> from collective.dexteritytextindexer.tests.behaviors import IIntBehavior
     >>> fti = DexterityFTI('IntFTI')
     >>> fti.behaviors = (
@@ -108,15 +115,18 @@ Do ints work?
 
 In Plone 4.3 int-values are stored as unicodes.
 Since our test should work also for old Plones, we convert everything
-to string here:
+to string here::
 
     >>> map(str, getSearchableText(obj3))
     ['57']
 
 
 When a schema marks a field as searchable which does not exist it should:
+
 - not break indexing other fields
 - log an error
+
+::
 
     >>> from collective.dexteritytextindexer.tests.behaviors import IMissingFieldBehavior
     >>> fti = DexterityFTI('MissingFieldFTI')
@@ -141,7 +151,7 @@ When a schema marks a field as searchable which does not exist it should:
 
 
 Test, if a subclassed schema also inherits the searchable configuration of
-it's superclass:
+it's superclass::
 
     >>> from collective.dexteritytextindexer.tests.behaviors import IInheritedBehavior
     >>> fti = DexterityFTI('InheritedFTI')

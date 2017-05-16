@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Contains the indexer and some helper methods for indexing.
 """
 
