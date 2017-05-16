@@ -13,7 +13,7 @@ matrix:
 install:
 - cp plone$PLONE_VERSION.cfg buildout.cfg
 - pip install -r requirements.txt
-- bin/buildout annotate
-- bin/buildout -Nq
+- buildout annotate
+- buildout -Nq
 script:
 - bin/test
