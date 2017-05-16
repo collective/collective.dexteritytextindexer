@@ -2,6 +2,7 @@
 """Contains different behaviors needed for testing.
 """
 from collective import dexteritytextindexer
+from plone.app.textfield import RichText
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
 from zope import schema
@@ -39,6 +40,21 @@ class IIntBehavior(model.Schema):
 
     dexteritytextindexer.searchable('int_field')
     int_field = schema.Int(title=u'Int')
+
+
+@provider(IFormFieldProvider)
+class IRichTextBehavior(model.Schema):
+    """Basic behavior with a rich-text field.
+    """
+
+    dexteritytextindexer.searchable('richtext_field')
+    richtext_field = RichText(
+        title=u"Body text",
+        default_mime_type='text/html',
+        output_mime_type='text/x-html',
+        allowed_mime_types=('text/html', 'text/plain',),
+        default=u'',
+    )
 
 
 @provider(IFormFieldProvider)
