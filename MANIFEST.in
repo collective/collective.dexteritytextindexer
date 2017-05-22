@@ -1,11 +1,4 @@
-exclude .installed.cfg
-exclude buildout.cfg
-global-exclude *.pyc
-global-exclude .DS_Store
-global-exclude ._*
 include *.rst
 include *.txt
-recursive-exclude bin *
-recursive-exclude develop-eggs *
-recursive-exclude parts *
-recursive-include collective *
+graft collective
+global-exclude *.py[co] .DS_Store
