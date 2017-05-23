@@ -1,9 +1,11 @@
-from collective.dexteritytextindexer.directives import SEARCHABLE_KEY
+# -*- coding: utf-8 -*-
 from collective.dexteritytextindexer.directives import searchable
+from collective.dexteritytextindexer.directives import SEARCHABLE_KEY
 from plone.supermodel import model
 from plone.supermodel.utils import mergedTaggedValueList
 from zope import schema
 from zope.interface import Interface
+
 import unittest
 import zope.component.testing
 

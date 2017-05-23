@@ -8,11 +8,12 @@ from zope import schema
 from zope.component import adapter
 from zope.component import adapts
 from zope.i18nmessageid import MessageFactory
-from zope.interface import Interface
 from zope.interface import implementer
 from zope.interface import implements
+from zope.interface import Interface
 from zope.schema import interfaces
 from zope.schema.interfaces import IField
+
 
 _ = MessageFactory('collective.dexteritytextindexer')
 

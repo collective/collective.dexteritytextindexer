@@ -1,8 +1,11 @@
 *.egg-info
 *.mo
 *.pyc
-.installed.cfg
+.*.cfg
 bin/
 buildout.cfg
 develop-eggs/
 parts/
+lib/
+local/
+include/

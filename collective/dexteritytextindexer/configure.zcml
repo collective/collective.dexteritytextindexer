@@ -34,6 +34,11 @@
         />
 
     <adapter
+        zcml:condition="installed plone.app.textfield"
+        factory="collective.dexteritytextindexer.converters.DexterityRichTextIndexFieldConverter"
+        />
+
+    <adapter
         factory="collective.dexteritytextindexer.converters.IntFieldConverter"
         />
 

@@ -7,7 +7,9 @@ Changelog
 
 - Added TupleFieldConverter, to enable indexing of portal catalog KeywordIndex indices.
   [jone, mtrebron]
-
+  
+- Add the ability to index a RichText field. Fixes #23.
+  [smcmahon]
 
 2.1.1 (2016-11-03)
 ------------------
