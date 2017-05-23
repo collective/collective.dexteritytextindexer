@@ -141,11 +141,10 @@ class IntFieldConverter(DefaultDexterityTextIndexFieldConverter):
         value = self.field.get(storage)
         return str(value)
 
+@implementer(interfaces.IDexterityTextIndexFieldConverter)
+@adapter(IDexterityContent, ITuple, IWidget)
 class TupleFieldConverter(DefaultDexterityTextIndexFieldConverter):
     """Converts the data of a tuple field"""
-
-    implements(interfaces.IDexterityTextIndexFieldConverter)
-    adapts(IDexterityContent, ITuple, IWidget)
 
     def convert(self):
         """return the adapted field value"""
