@@ -2,6 +2,7 @@
 *.mo
 *.pyc
 .*.cfg
+.Python
 bin/
 buildout.cfg
 develop-eggs/
@@ -9,3 +10,4 @@ parts/
 lib/
 local/
 include/
+pip-selfcheck.json
