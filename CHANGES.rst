@@ -5,6 +5,8 @@ Changelog
 2.1.2 (unreleased)
 ------------------
 
+- Improved code quality.  [maurits]
+
 - Add the ability to index a RichText field. Fixes #23.
   [smcmahon]
 
