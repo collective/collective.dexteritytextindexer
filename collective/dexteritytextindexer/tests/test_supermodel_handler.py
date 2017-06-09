@@ -25,8 +25,9 @@ class TestIndexerSchema(unittest.TestCase):
         handler = IndexerSchema()
         handler.read(field_node, IDummy, IDummy['dummy'])
 
-        self.assertEqual([(Interface, 'dummy', 'true')],
-                          IDummy.getTaggedValue(SEARCHABLE_KEY))
+        self.assertEqual(
+            [(Interface, 'dummy', 'true')],
+            IDummy.getTaggedValue(SEARCHABLE_KEY))
 
     def test_read_multiple(self):
         field_node1 = ElementTree.Element('field')
@@ -47,9 +48,10 @@ class TestIndexerSchema(unittest.TestCase):
         handler.read(field_node2, IDummy, IDummy['dummy2'])
         handler.read(field_node3, IDummy, IDummy['dummy3'])
 
-        self.assertEqual([(Interface, 'dummy1', 'true'),
-                           (Interface, 'dummy3', 'true')],
-                          IDummy.getTaggedValue(SEARCHABLE_KEY))
+        self.assertEqual([
+            (Interface, 'dummy1', 'true'),
+            (Interface, 'dummy3', 'true')],
+            IDummy.getTaggedValue(SEARCHABLE_KEY))
 
     def test_read_no_data(self):
         field_node = ElementTree.Element('field')
@@ -73,8 +75,9 @@ class TestIndexerSchema(unittest.TestCase):
         handler = IndexerSchema()
         handler.write(field_node, IDummy, IDummy['dummy'])
 
-        self.assertEqual('true',
-                          field_node.get(ns('searchable', self.namespace)))
+        self.assertEqual(
+            'true',
+            field_node.get(ns('searchable', self.namespace)))
 
     def test_write_partial(self):
         field_node = ElementTree.Element('field')
@@ -90,10 +93,12 @@ class TestIndexerSchema(unittest.TestCase):
         handler.write(field_node, IDummy, IDummy['dummy'])
         handler.write(field_node2, IDummy, IDummy['dummy2'])
 
-        self.assertEqual('true',
-                          field_node.get(ns('searchable', self.namespace)))
-        self.assertEqual(None,
-                          field_node2.get(ns('searchable', self.namespace)))
+        self.assertEqual(
+            'true',
+            field_node.get(ns('searchable', self.namespace)))
+        self.assertEqual(
+            None,
+            field_node2.get(ns('searchable', self.namespace)))
 
     def test_write_no_data(self):
         field_node = ElementTree.Element('field')
@@ -104,8 +109,9 @@ class TestIndexerSchema(unittest.TestCase):
         handler = IndexerSchema()
         handler.write(field_node, IDummy, IDummy['dummy'])
 
-        self.assertEqual(None,
-                          field_node.get(ns('searchable', self.namespace)))
+        self.assertEqual(
+            None,
+            field_node.get(ns('searchable', self.namespace)))
 
 
 def test_suite():

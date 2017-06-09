@@ -124,7 +124,7 @@ if HAS_NAMEDFILE:
             except (ConflictError, KeyboardInterrupt):
                 raise
 
-            except Exception, e:
+            except Exception as e:
                 LOGGER.error('Error while trying to convert file contents '
                              'to "text/plain": %s' % str(e))
 
