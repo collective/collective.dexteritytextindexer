@@ -17,10 +17,10 @@ class TestIndexerSchema(unittest.TestCase):
 
     def test_read(self):
         field_node = ElementTree.Element('field')
-        field_node.set(ns("searchable", self.namespace), "true")
+        field_node.set(ns('searchable', self.namespace), 'true')
 
         class IDummy(Interface):
-            dummy = zope.schema.TextLine(title=u"dummy")
+            dummy = zope.schema.TextLine(title=u'dummy')
 
         handler = IndexerSchema()
         handler.read(field_node, IDummy, IDummy['dummy'])
@@ -30,17 +30,17 @@ class TestIndexerSchema(unittest.TestCase):
 
     def test_read_multiple(self):
         field_node1 = ElementTree.Element('field')
-        field_node1.set(ns("searchable", self.namespace), "true")
+        field_node1.set(ns('searchable', self.namespace), 'true')
 
         field_node2 = ElementTree.Element('field')
 
         field_node3 = ElementTree.Element('field')
-        field_node3.set(ns("searchable", self.namespace), "true")
+        field_node3.set(ns('searchable', self.namespace), 'true')
 
         class IDummy(Interface):
-            dummy1 = zope.schema.TextLine(title=u"dummy1")
-            dummy2 = zope.schema.TextLine(title=u"dummy2")
-            dummy3 = zope.schema.TextLine(title=u"dummy3")
+            dummy1 = zope.schema.TextLine(title=u'dummy1')
+            dummy2 = zope.schema.TextLine(title=u'dummy2')
+            dummy3 = zope.schema.TextLine(title=u'dummy3')
 
         handler = IndexerSchema()
         handler.read(field_node1, IDummy, IDummy['dummy1'])
@@ -55,7 +55,7 @@ class TestIndexerSchema(unittest.TestCase):
         field_node = ElementTree.Element('field')
 
         class IDummy(Interface):
-            dummy = zope.schema.TextLine(title=u"dummy1")
+            dummy = zope.schema.TextLine(title=u'dummy1')
 
         handler = IndexerSchema()
         handler.read(field_node, IDummy, IDummy['dummy'])
@@ -66,23 +66,23 @@ class TestIndexerSchema(unittest.TestCase):
         field_node = ElementTree.Element('field')
 
         class IDummy(Interface):
-            dummy = zope.schema.TextLine(title=u"dummy1")
+            dummy = zope.schema.TextLine(title=u'dummy1')
 
         IDummy.setTaggedValue(SEARCHABLE_KEY, [(Interface, 'dummy', 'true')])
 
         handler = IndexerSchema()
         handler.write(field_node, IDummy, IDummy['dummy'])
 
-        self.assertEqual("true",
-                          field_node.get(ns("searchable", self.namespace)))
+        self.assertEqual('true',
+                          field_node.get(ns('searchable', self.namespace)))
 
     def test_write_partial(self):
         field_node = ElementTree.Element('field')
         field_node2 = ElementTree.Element('field')
 
         class IDummy(Interface):
-            dummy = zope.schema.TextLine(title=u"dummy1")
-            dummy2 = zope.schema.TextLine(title=u"dummy2")
+            dummy = zope.schema.TextLine(title=u'dummy1')
+            dummy2 = zope.schema.TextLine(title=u'dummy2')
 
         IDummy.setTaggedValue(SEARCHABLE_KEY, [(Interface, 'dummy', 'true')])
 
@@ -90,22 +90,22 @@ class TestIndexerSchema(unittest.TestCase):
         handler.write(field_node, IDummy, IDummy['dummy'])
         handler.write(field_node2, IDummy, IDummy['dummy2'])
 
-        self.assertEqual("true",
-                          field_node.get(ns("searchable", self.namespace)))
+        self.assertEqual('true',
+                          field_node.get(ns('searchable', self.namespace)))
         self.assertEqual(None,
-                          field_node2.get(ns("searchable", self.namespace)))
+                          field_node2.get(ns('searchable', self.namespace)))
 
     def test_write_no_data(self):
         field_node = ElementTree.Element('field')
 
         class IDummy(Interface):
-            dummy = zope.schema.TextLine(title=u"dummy1")
+            dummy = zope.schema.TextLine(title=u'dummy1')
 
         handler = IndexerSchema()
         handler.write(field_node, IDummy, IDummy['dummy'])
 
         self.assertEqual(None,
-                          field_node.get(ns("searchable", self.namespace)))
+                          field_node.get(ns('searchable', self.namespace)))
 
 
 def test_suite():

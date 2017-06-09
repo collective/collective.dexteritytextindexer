@@ -62,7 +62,7 @@ class TextIndexerLayer(PloneSandboxLayer):
 TEXT_INDEXER_FIXTURE = TextIndexerLayer()
 TEXT_INTEXER_INTEGRATION_TESTING = IntegrationTesting(
     bases=(TEXT_INDEXER_FIXTURE,),
-    name="collective.dexteritytextindexer:Integration")
+    name='collective.dexteritytextindexer:Integration')
 
 
 class TextIndexerFunctionalLayer(PloneSandboxLayer):
@@ -82,5 +82,5 @@ TEXT_INDEXER_FUNCTIONAL_FIXTURE = TextIndexerFunctionalLayer()
 
 TEXT_INDEXER_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(TEXT_INDEXER_FUNCTIONAL_FIXTURE,),
-    name="collective.dexteritytextindexer:Functional"
+    name='collective.dexteritytextindexer:Functional'
 )
