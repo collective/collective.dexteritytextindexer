@@ -59,8 +59,8 @@ class TestSchemaEditor(unittest.TestCase):
 
         self.browser = Browser(self.layer['app'])
         self.browser.addHeader(
-            'Authorization', 'Basic %s:%s' % (TEST_USER_NAME,
-                                              TEST_USER_PASSWORD,))
+            'Authorization', 'Basic {0}:{1}'.format(
+                TEST_USER_NAME, TEST_USER_PASSWORD))
         self.portal_url = self.layer['portal'].absolute_url()
 
     def test_searchable_field_is_not_visible_without_behavior(self):
