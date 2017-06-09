@@ -58,6 +58,36 @@ class IRichTextBehavior(model.Schema):
 
 
 @provider(IFormFieldProvider)
+class ITupleBehavior(model.Schema):
+    """Basic behavior with a tuple field.
+    """
+
+    dexteritytextindexer.searchable('tuple_field')
+    tuple_field = schema.Tuple(
+        title=u'Tuple',
+        value_type=schema.TextLine(),
+        required=False,
+        missing_value=(),
+    )
+
+
+@provider(IFormFieldProvider)
+class ITupleChoiceBehavior(model.Schema):
+    """Basic behavior with a tuple choice field.
+    """
+
+    dexteritytextindexer.searchable('tuple_choice_field')
+    tuple_choice_field = schema.Tuple(
+        title=u'Tuple choice',
+        value_type=schema.Choice(
+            vocabulary='plone.app.vocabularies.Keywords'
+        ),
+        required=False,
+        missing_value=(),
+    )
+
+
+@provider(IFormFieldProvider)
 class IInheritedBehavior(ISimpleBehavior):
     """Behavior extending from ISimpleBehavior for testing inheritance.
     """
