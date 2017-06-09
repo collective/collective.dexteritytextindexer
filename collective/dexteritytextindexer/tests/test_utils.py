@@ -25,9 +25,9 @@ class TestUtils(TestCase):
     """
 
     def test_marking_field_as_searchable(self):
-        self.assertEquals(get_searchable_fields(IExample), [])
+        self.assertEqual(get_searchable_fields(IExample), [])
         searchable(IExample, u'foo')
-        self.assertEquals(get_searchable_fields(IExample), ['foo'])
+        self.assertEqual(get_searchable_fields(IExample), ['foo'])
 
     def test_break_when_field_does_not_exist(self):
         with self.assertRaises(AttributeError) as cm:
@@ -39,12 +39,12 @@ class TestUtils(TestCase):
             ' has no field "foo"')
 
     def test_no_longer_searchable_removes_flag(self):
-        self.assertEquals(get_searchable_fields(IBaz), [])
+        self.assertEqual(get_searchable_fields(IBaz), [])
         searchable(IBaz, u'baz')
-        self.assertEquals(get_searchable_fields(IBaz), ['baz'])
+        self.assertEqual(get_searchable_fields(IBaz), ['baz'])
         self.assertTrue(no_longer_searchable(IBaz, 'baz'))
         self.assertFalse(no_longer_searchable(IBaz, 'baz'))
-        self.assertEquals(get_searchable_fields(IBaz), [])
+        self.assertEqual(get_searchable_fields(IBaz), [])
 
     def test_no_longer_searchable_breaks_when_field_does_not_exist(self):
         with self.assertRaises(AttributeError) as cm:

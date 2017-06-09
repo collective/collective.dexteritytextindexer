@@ -28,7 +28,7 @@ class TestDirectives(unittest.TestCase):
             searchable('foo')
             foo = schema.TextLine(title=u'Foo')
 
-        self.assertEquals([(Interface, 'foo', 'true')],
+        self.assertEqual([(Interface, 'foo', 'true')],
                           mergedTaggedValueList(IDummy, SEARCHABLE_KEY))
 
     def test_inherited_schema_still_has_tagged_value(self):
@@ -46,7 +46,7 @@ class TestDirectives(unittest.TestCase):
             """Schema class which inherits a field from IFoo.
             """
 
-        self.assertEquals([(Interface, 'baz', 'true')],
+        self.assertEqual([(Interface, 'baz', 'true')],
                           mergedTaggedValueList(IFoo, SEARCHABLE_KEY))
-        self.assertEquals([(Interface, 'baz', 'true')],
+        self.assertEqual([(Interface, 'baz', 'true')],
                           mergedTaggedValueList(IBar, SEARCHABLE_KEY))

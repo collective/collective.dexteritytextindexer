@@ -25,7 +25,7 @@ class TestIndexerSchema(unittest.TestCase):
         handler = IndexerSchema()
         handler.read(field_node, IDummy, IDummy['dummy'])
 
-        self.assertEquals([(Interface, 'dummy', 'true')],
+        self.assertEqual([(Interface, 'dummy', 'true')],
                           IDummy.getTaggedValue(SEARCHABLE_KEY))
 
     def test_read_multiple(self):
@@ -47,7 +47,7 @@ class TestIndexerSchema(unittest.TestCase):
         handler.read(field_node2, IDummy, IDummy['dummy2'])
         handler.read(field_node3, IDummy, IDummy['dummy3'])
 
-        self.assertEquals([(Interface, 'dummy1', 'true'),
+        self.assertEqual([(Interface, 'dummy1', 'true'),
                            (Interface, 'dummy3', 'true')],
                           IDummy.getTaggedValue(SEARCHABLE_KEY))
 
@@ -60,7 +60,7 @@ class TestIndexerSchema(unittest.TestCase):
         handler = IndexerSchema()
         handler.read(field_node, IDummy, IDummy['dummy'])
 
-        self.assertEquals(None, IDummy.queryTaggedValue(SEARCHABLE_KEY))
+        self.assertEqual(None, IDummy.queryTaggedValue(SEARCHABLE_KEY))
 
     def test_write(self):
         field_node = ElementTree.Element('field')
@@ -73,7 +73,7 @@ class TestIndexerSchema(unittest.TestCase):
         handler = IndexerSchema()
         handler.write(field_node, IDummy, IDummy['dummy'])
 
-        self.assertEquals("true",
+        self.assertEqual("true",
                           field_node.get(ns("searchable", self.namespace)))
 
     def test_write_partial(self):
@@ -90,9 +90,9 @@ class TestIndexerSchema(unittest.TestCase):
         handler.write(field_node, IDummy, IDummy['dummy'])
         handler.write(field_node2, IDummy, IDummy['dummy2'])
 
-        self.assertEquals("true",
+        self.assertEqual("true",
                           field_node.get(ns("searchable", self.namespace)))
-        self.assertEquals(None,
+        self.assertEqual(None,
                           field_node2.get(ns("searchable", self.namespace)))
 
     def test_write_no_data(self):
@@ -104,7 +104,7 @@ class TestIndexerSchema(unittest.TestCase):
         handler = IndexerSchema()
         handler.write(field_node, IDummy, IDummy['dummy'])
 
-        self.assertEquals(None,
+        self.assertEqual(None,
                           field_node.get(ns("searchable", self.namespace)))
 
 
