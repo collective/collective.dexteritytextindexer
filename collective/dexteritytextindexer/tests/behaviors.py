@@ -49,7 +49,7 @@ class IRichTextBehavior(model.Schema):
 
     dexteritytextindexer.searchable('richtext_field')
     richtext_field = RichText(
-        title=u"Body text",
+        title=u'Body text',
         default_mime_type='text/html',
         output_mime_type='text/x-html',
         allowed_mime_types=('text/html', 'text/plain',),

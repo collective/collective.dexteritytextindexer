@@ -6,8 +6,8 @@ converter only enabled when plone.namedfile is installed
 """
 
 from collective.dexteritytextindexer import interfaces
+from plone import api
 from plone.dexterity.interfaces import IDexterityContent
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
 from z3c.form.interfaces import IWidget
 from ZODB.POSException import ConflictError
@@ -53,7 +53,7 @@ class DefaultDexterityTextIndexFieldConverter(object):
     def convert(self):
         """Convert the adapted field value to text/plain for indexing"""
         html = self.widget.render().strip()
-        transforms = getToolByName(self.context, 'portal_transforms')
+        transforms = api.portal.get_tool('portal_transforms')
         if isinstance(html, unicode):
             html = html.encode('utf-8')
         stream = transforms.convertTo('text/plain', html, mimetype='text/html')
@@ -76,7 +76,7 @@ if HAS_RICHTEXT:
         def convert(self):
             """Convert a rich text field value to text/plain for indexing"""
             textvalue = self.field.get(self.context)
-            transforms = getToolByName(self.context, 'portal_transforms')
+            transforms = api.portal.get_tool('portal_transforms')
             return transforms.convertTo(
                 'text/plain',
                 safe_unicode(textvalue.output).encode('utf8'),
@@ -106,7 +106,7 @@ if HAS_NAMEDFILE:
                 return data.data
 
             # if there is no path to text/plain, do nothing
-            transforms = getToolByName(self.context, 'portal_transforms')
+            transforms = api.portal.get_tool('portal_transforms')
 
             # pylint: disable=W0212
             # W0212: Access to a protected member _findPath of a client class
@@ -124,9 +124,9 @@ if HAS_NAMEDFILE:
             except (ConflictError, KeyboardInterrupt):
                 raise
 
-            except Exception, e:
+            except Exception as e:
                 LOGGER.error('Error while trying to convert file contents '
-                             'to "text/plain": %s' % str(e))
+                             'to "text/plain": %s', str(e))
 
 
 @implementer(interfaces.IDexterityTextIndexFieldConverter)

@@ -11,7 +11,7 @@ def searchable(iface, field_name):
     if schema.getFields(iface).get(field_name) is None:
         dottedname = '.'.join((iface.__module__, iface.__name__))
         raise AttributeError(
-            '%s has no field "%s"' % (
+            '{0} has no field "{1}"'.format(
                 dottedname,
                 field_name
             )
@@ -32,7 +32,7 @@ def no_longer_searchable(iface, field_name):
     if schema.getFields(iface).get(field_name) is None:
         dottedname = '.'.join((iface.__module__, iface.__name__))
         raise AttributeError(
-            '%s has no field "%s"' % (
+            '{0} has no field "{1}"'.format(
                 dottedname,
                 field_name
             )

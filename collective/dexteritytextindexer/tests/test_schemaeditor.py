@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from collective.dexteritytextindexer.testing import TEXT_INDEXER_FUNCTIONAL_TESTING  # noqa
+from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import TEST_USER_PASSWORD
 from plone.dexterity.fti import DexterityFTI
 from plone.testing.z2 import Browser
-from Products.CMFCore.utils import getToolByName
 
 import transaction
 import unittest
@@ -17,7 +17,7 @@ class TestSchemaEditor(unittest.TestCase):
     layer = TEXT_INDEXER_FUNCTIONAL_TESTING
 
     def setUp(self):
-        portal_types = getToolByName(self.layer['portal'], 'portal_types')
+        portal_types = api.portal.get_tool('portal_types')
 
         # Define new portal type without behavior
         fti = DexterityFTI(str('without_behavior'), title='Without Behavior')
@@ -59,8 +59,8 @@ class TestSchemaEditor(unittest.TestCase):
 
         self.browser = Browser(self.layer['app'])
         self.browser.addHeader(
-                'Authorization', 'Basic %s:%s' % (TEST_USER_NAME,
-                                                  TEST_USER_PASSWORD,))
+            'Authorization', 'Basic {0}:{1}'.format(
+                TEST_USER_NAME, TEST_USER_PASSWORD))
         self.portal_url = self.layer['portal'].absolute_url()
 
     def test_searchable_field_is_not_visible_without_behavior(self):
@@ -81,7 +81,7 @@ class TestSchemaEditor(unittest.TestCase):
             self.browser.getControl('Searchable').selected)
 
     def test_searchable_field_change_is_saved(self):
-        portal_types = getToolByName(self.layer['portal'], 'portal_types')
+        portal_types = api.portal.get_tool('portal_types')
         fti = portal_types['with_behavior']
         self.assertNotIn('indexer:searchable="true"', fti.model_source)
 

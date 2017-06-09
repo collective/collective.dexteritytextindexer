@@ -4,15 +4,14 @@ from collective.dexteritytextindexer.interfaces import INDEXER_NAMESPACE
 from collective.dexteritytextindexer.interfaces import INDEXER_PREFIX
 from plone.supermodel.parser import IFieldMetadataHandler
 from plone.supermodel.utils import ns
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
 
 
+@implementer(IFieldMetadataHandler)
 class IndexerSchema(object):
     """Support the indexer: namespace in model definitions.
     """
-
-    implements(IFieldMetadataHandler)
 
     namespace = INDEXER_NAMESPACE
     prefix = INDEXER_PREFIX

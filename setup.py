@@ -27,6 +27,7 @@ setup(
         'Framework :: Plone',
         'Framework :: Plone :: 4.3',
         'Framework :: Plone :: 5.0',
+        'Framework :: Plone :: 5.1',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     keywords='plone dexterity searchable text indexer',
@@ -39,6 +40,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        'plone.api',
         'plone.app.dexterity',
         'plone.behavior',
         'plone.dexterity',

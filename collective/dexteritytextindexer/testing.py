@@ -13,7 +13,6 @@ from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from StringIO import StringIO
-from zope.configuration import xmlconfig
 
 import logging
 
@@ -31,12 +30,13 @@ class TextIndexerLayer(PloneSandboxLayer):
         """After setting up zope, load all necessary zcml files.
         """
         import collective.dexteritytextindexer
-        xmlconfig.file('configure.zcml', collective.dexteritytextindexer,
-                       context=configurationContext)
+        self.loadZCML(
+            package=collective.dexteritytextindexer,
+            context=configurationContext)
         import collective.dexteritytextindexer.tests
-        xmlconfig.file('configure.zcml',
-                       collective.dexteritytextindexer.tests,
-                       context=configurationContext)
+        self.loadZCML(
+            package=collective.dexteritytextindexer.tests,
+            context=configurationContext)
 
     def setUpPloneSite(self, portal):
         """After setting up plone, give Manager role to the test user.
@@ -62,7 +62,7 @@ class TextIndexerLayer(PloneSandboxLayer):
 TEXT_INDEXER_FIXTURE = TextIndexerLayer()
 TEXT_INTEXER_INTEGRATION_TESTING = IntegrationTesting(
     bases=(TEXT_INDEXER_FIXTURE,),
-    name="collective.dexteritytextindexer:Integration")
+    name='collective.dexteritytextindexer:Integration')
 
 
 class TextIndexerFunctionalLayer(PloneSandboxLayer):
@@ -71,8 +71,9 @@ class TextIndexerFunctionalLayer(PloneSandboxLayer):
 
     def setUpZope(self, app, configurationContext):
         import plone.app.dexterity
-        xmlconfig.file('configure.zcml', plone.app.dexterity,
-                       context=configurationContext)
+        self.loadZCML(
+            package=plone.app.dexterity,
+            context=configurationContext)
 
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, 'plone.app.dexterity:default')
@@ -82,5 +83,5 @@ TEXT_INDEXER_FUNCTIONAL_FIXTURE = TextIndexerFunctionalLayer()
 
 TEXT_INDEXER_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(TEXT_INDEXER_FUNCTIONAL_FIXTURE,),
-    name="collective.dexteritytextindexer:Functional"
+    name='collective.dexteritytextindexer:Functional'
 )

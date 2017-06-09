@@ -6,12 +6,9 @@ from plone.schemaeditor.interfaces import IFieldEditorExtender
 from plone.schemaeditor.interfaces import ISchemaContext
 from zope import schema
 from zope.component import adapter
-from zope.component import adapts
 from zope.i18nmessageid import MessageFactory
 from zope.interface import implementer
-from zope.interface import implements
 from zope.interface import Interface
-from zope.schema import interfaces
 from zope.schema.interfaces import IField
 
 
@@ -25,9 +22,9 @@ class ISearchableTextField(Interface):
     )
 
 
+@adapter(IField)
+@implementer(ISearchableTextField)
 class SearchableTextField(object):
-    implements(ISearchableTextField)
-    adapts(interfaces.IField)
 
     namespace = INDEXER_NAMESPACE
     prefix = INDEXER_PREFIX
