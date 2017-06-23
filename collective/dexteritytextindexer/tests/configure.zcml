@@ -31,6 +31,20 @@
           />
 
     <plone:behavior
+          title="tuple behavior"
+          description=""
+          provides=".behaviors.ITupleBehavior"
+          for="plone.dexterity.interfaces.IDexterityContent"
+          />
+
+    <plone:behavior
+          title="tuple choice behavior"
+          description=""
+          provides=".behaviors.ITupleChoiceBehavior"
+          for="plone.dexterity.interfaces.IDexterityContent"
+          />
+
+    <plone:behavior
           title="inherited behavior"
           description=""
           provides=".behaviors.IInheritedBehavior"

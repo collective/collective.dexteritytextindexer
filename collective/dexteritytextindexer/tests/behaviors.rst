@@ -154,6 +154,56 @@ Do rich-text fields work?
     ['in', 'for', 'an', 'inch', 'in', 'for', 'a', 'pound']
 
 
+Do tuple fields work?
+
+    >>> from collective.dexteritytextindexer.tests.behaviors import IRichTextBehavior
+    >>> fti = DexterityFTI('TupleFTI')
+    >>> fti.behaviors = (
+    ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
+    ...     'collective.dexteritytextindexer.tests.behaviors.ITupleBehavior',
+    ... )
+    >>> portal.portal_types._setObject('TupleFTI', fti)
+    'TupleFTI'
+    >>> schema = fti.lookupSchema()
+    >>> obj5 = createContentInContainer(
+    ...    portal,
+    ...    'TupleFTI',
+    ...    checkContstraints=False,
+    ...    tuple_field=('My', 'kingdom', 'for', 'a', 'horse'),
+    ... )
+
+    >>> obj5
+    <Item at /plone/tuplefti>
+
+    >>> getSearchableText(obj5)
+    ['my', 'kingdom', 'for', 'a', 'horse']
+
+
+Do tuple fields with choice values work?
+
+    >>> from collective.dexteritytextindexer.tests.behaviors import IRichTextBehavior
+    >>> fti = DexterityFTI('TupleChoiceFTI')
+    >>> fti.behaviors = (
+    ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
+    ...     'collective.dexteritytextindexer.tests.behaviors.ITupleChoiceBehavior',
+    ... )
+    >>> portal.portal_types._setObject('TupleChoiceFTI', fti)
+    'TupleChoiceFTI'
+    >>> schema = fti.lookupSchema()
+    >>> obj6 = createContentInContainer(
+    ...    portal,
+    ...    'TupleChoiceFTI',
+    ...    checkContstraints=False,
+    ...    tuple_choice_field=('Knights', 'ni'),
+    ... )
+
+    >>> obj6
+    <Item at /plone/tuplechoicefti>
+
+    >>> getSearchableText(obj6)
+    ['knights', 'ni']
+
+
 When a schema marks a field as searchable which does not exist it should:
 
 - not break indexing other fields
