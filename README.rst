@@ -39,7 +39,7 @@ is done with directives::
     class IMyBehavior(Schema):
 
         dexteritytextindexer.searchable('specialfield')
-        specialfield = schema.TextField(title=u'Special field')
+        specialfield = schema.Text(title=u'Special field')
 
     alsoProvides(IMyBehavior, IFormFieldProvider)
 
