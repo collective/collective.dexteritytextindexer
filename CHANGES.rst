@@ -5,7 +5,9 @@ Changelog
 2.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix a bug in the RichText field indexer when the value of RichText field is None.
+  The bug was introduced in 2.2.0.
+  [mbaechtold]
 
 
 2.2.0 (2017-06-23)

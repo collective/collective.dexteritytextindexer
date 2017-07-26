@@ -56,6 +56,21 @@ class IRichTextBehavior(model.Schema):
         default=u'',
     )
 
+@provider(IFormFieldProvider)
+class IEmptyRichTextBehavior(model.Schema):
+    """Behavior with a rich-text field without a default value.
+    """
+
+    dexteritytextindexer.searchable('foo')
+    foo = schema.TextLine(title=u'Foo')
+
+    dexteritytextindexer.searchable('empty_richtext_field')
+    empty_richtext_field = RichText(
+        title=u'Body text',
+        default_mime_type='text/html',
+        output_mime_type='text/x-html',
+        allowed_mime_types=('text/html', 'text/plain',),
+    )
 
 @provider(IFormFieldProvider)
 class ITupleBehavior(model.Schema):
