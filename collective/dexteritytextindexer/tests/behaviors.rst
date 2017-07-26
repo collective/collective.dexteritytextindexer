@@ -154,6 +154,32 @@ Do rich-text fields work?
     ['in', 'for', 'an', 'inch', 'in', 'for', 'a', 'pound']
 
 
+Do empty rich-text fields work?
+
+    >>> from collective.dexteritytextindexer.tests.behaviors import IEmptyRichTextBehavior
+    >>> fti = DexterityFTI('EmptyRichTextFTI')
+    >>> fti.behaviors = (
+    ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
+    ...     'collective.dexteritytextindexer.tests.behaviors.IEmptyRichTextBehavior',
+    ... )
+    >>> portal.portal_types._setObject('EmptyRichTextFTI', fti)
+    'EmptyRichTextFTI'
+    >>> schema = fti.lookupSchema()
+
+    >>> obj_empty_rich_text = createContentInContainer(
+    ...    portal,
+    ...    'EmptyRichTextFTI',
+    ...    checkContstraints=False,
+    ...    foo='Hello World',
+    ... )
+
+    >>> obj_empty_rich_text
+    <Item at /plone/emptyrichtextfti>
+
+    >>> getSearchableText(obj_empty_rich_text)
+    ['hello', 'world']
+
+
 Do tuple fields work?
 
     >>> from collective.dexteritytextindexer.tests.behaviors import IRichTextBehavior

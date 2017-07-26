@@ -77,6 +77,8 @@ if HAS_RICHTEXT:
         def convert(self):
             """Convert a rich text field value to text/plain for indexing"""
             textvalue = self.field.get(self.context)
+            if textvalue is None:
+                return ''
             transforms = api.portal.get_tool('portal_transforms')
             return transforms.convertTo(
                 'text/plain',
