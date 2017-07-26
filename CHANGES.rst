@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.2.1 (unreleased)
+2.2.1 (2017-07-26)
 ------------------
 
 - Fix a bug in the RichText field indexer when the value of RichText field is None.
