@@ -5,7 +5,11 @@ Changelog
 2.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- A few updates to make build pass on travis again, i.e.
+  add index/allow-hosts to buildout configs,
+  set version.cfg reference to 'latest' for 5.0.x,
+  bump setuptools and zc.buildout versions
+  [staeff]
 
 
 2.2.1 (2017-07-26)
