@@ -11,6 +11,10 @@ Changelog
   bump setuptools and zc.buildout versions
   [staeff]
 
+- Update the Add-On to also run in Plone 5.2 with Python 3.
+  Fixes https://github.com/collective/collective.dexteritytextindexer/issues/31
+  [staeff]
+
 
 2.2.1 (2017-07-26)
 ------------------
