@@ -18,6 +18,7 @@ from zope.schema.interfaces import IInt
 from zope.schema.interfaces import ITuple
 
 import logging
+import six
 
 
 try:
@@ -55,7 +56,7 @@ class DefaultDexterityTextIndexFieldConverter(object):
         """Convert the adapted field value to text/plain for indexing"""
         html = self.widget.render().strip()
         transforms = api.portal.get_tool('portal_transforms')
-        if isinstance(html, unicode):
+        if six.PY2 and isinstance(html, six.text_type):
             html = html.encode('utf-8')
         stream = transforms.convertTo('text/plain', html, mimetype='text/html')
         return stream.getData().strip()
@@ -155,10 +156,10 @@ class TupleFieldConverter(DefaultDexterityTextIndexFieldConverter):
         result = []
         if self.field.get(storage):
             for value in self.field.get(storage):
-                if isinstance(value, unicode):
+                if isinstance(value, six.text_type):
                     result.append(value)
                 elif isinstance(value, str):
                     result.append(value.decode('utf-8'))
                 else:
-                    result.append(unicode(value))
+                    result.append(six.text_type(value))
         return u' '.join(result)
