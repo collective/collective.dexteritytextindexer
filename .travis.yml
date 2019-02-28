@@ -1,21 +1,38 @@
 language: python
-python: 2.7
 sudo: false
+matrix:
+  include:
+    - python: "2.7"
+      env: PLONE_VERSION=4.3.x
+    - python: "2.7"
+      env: PLONE_VERSION=5.0.x
+    - python: "2.7"
+      env: PLONE_VERSION=5.1.x
+    - python: "2.7"
+      env: PLONE_VERSION=5.2.x
+    - python: "3.6"
+      env: PLONE_VERSION=5.2.x
+    - python: "3.7"
+      env: PLONE_VERSION=5.2.x
+      dist: xenial
+      sudo: true
+  fast_finish: true
 cache:
   directories:
   - eggs
   - parts/node
   - downloads
-env:
-- PLONE_VERSION=4.3
-- PLONE_VERSION=5.0
-- PLONE_VERSION=5.1
-matrix:
-  fast_finish: true
+  - $HOME/buildout-cache
+before_install:
+  - mkdir -p $HOME/buildout-cache/{eggs,downloads}
+  - mkdir $HOME/.buildout
+  - echo "[buildout]" > $HOME/.buildout/default.cfg
+  - echo "download-cache = $HOME/buildout-cache/downloads" >> $HOME/.buildout/default.cfg
+  - echo "eggs-directory = $HOME/buildout-cache/eggs" >> $HOME/.buildout/default.cfg
+  - pip install -r requirements.txt
+  - cp plone-$PLONE_VERSION.cfg buildout.cfg
 install:
-- ln -s plone-$PLONE_VERSION.x.cfg buildout.cfg
-- pip install -r requirements.txt
-- buildout annotate
-- buildout -Nq
+  - buildout annotate
+  - buildout -Nq
 script:
-- bin/test
+  - bin/test

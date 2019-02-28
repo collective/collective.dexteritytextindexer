@@ -117,7 +117,7 @@ In Plone 4.3 int-values are stored as unicodes.
 Since our test should work also for old Plones, we convert everything
 to string here::
 
-    >>> map(str, getSearchableText(obj3))
+    >>> list(map(str, getSearchableText(obj3)))
     ['57']
 
 
