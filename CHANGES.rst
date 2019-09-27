@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.2.2 (unreleased)
+2.3.0 (2019-09-27)
 ------------------
 
 - A few updates to make build pass on travis again, i.e.
