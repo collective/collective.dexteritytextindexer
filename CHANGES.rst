@@ -5,7 +5,8 @@ Changelog
 2.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add behavior shortname "collective.dexteritytextindexer"
+  [agitator]
 
 
 2.3.0 (2019-09-27)

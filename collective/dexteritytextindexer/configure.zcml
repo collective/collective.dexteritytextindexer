@@ -10,6 +10,7 @@
     <!-- marker behavior for enabling indexer -->
     <plone:behavior
           title="Dynamic SearchableText indexer behavior"
+          name="collective.dexteritytextindexer"
           description="Enables the dynamic SearchableText indexer for a content type"
           provides="collective.dexteritytextindexer.behavior.IDexterityTextIndexer"
           />
