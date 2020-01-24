@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.3.1 (unreleased)
+2.4.0 (2020-01-24)
 ------------------
 
 - Add behavior shortname "collective.dexteritytextindexer"

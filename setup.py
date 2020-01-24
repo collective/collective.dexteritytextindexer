@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
 
-version = '2.3.1.dev0'
+version = '2.4.0'
 
 tests_require = [
     'zope.configuration',
