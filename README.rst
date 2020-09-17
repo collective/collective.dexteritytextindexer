@@ -102,10 +102,10 @@ Example::
     from plone.dexterity.interfaces import IDexterityContent
     from z3c.form.interfaces import IWidget
     from zope.component import adapts
-    from zope.interface import implements
+    from zope.interface import implementer
 
+    @implementer(IDexterityTextIndexFieldConverter)
     class CustomFieldConverter(DefaultDexterityTextIndexFieldConverter):
-        implements(IDexterityTextIndexFieldConverter)
         adapts(IDexterityContent, IMyFancyField, IWidget)
 
         def convert(self):
@@ -136,11 +136,11 @@ additional data::
 
     from collective import dexteritytextindexer
     from zope.component import adapts
-    from zope.interface import implements
+    from zope.interface import implementer
 
+    implementer(dexteritytextindexer.IDynamicTextIndexExtender)
     class MySearchableTextExtender(object):
         adapts(IMyBehavior)
-        implements(dexteritytextindexer.IDynamicTextIndexExtender)
 
         def __init__(self, context):
             self.context = context
