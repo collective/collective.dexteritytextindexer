@@ -80,12 +80,14 @@ if HAS_RICHTEXT:
             textvalue = self.field.get(self.context)
             if textvalue is None:
                 return ''
+            html = safe_unicode(textvalue.output)
             transforms = api.portal.get_tool('portal_transforms')
-            return transforms.convertTo(
-                'text/plain',
-                safe_unicode(textvalue.output).encode('utf8'),
-                mimetype=textvalue.mimeType,
-            ).getData().strip()
+            if six.PY2 and isinstance(html, six.text_type):
+                html = html.encode('utf-8')
+            stream = transforms.convertTo(
+                'text/plain', html, mimetype=textvalue.mimeType
+            )
+            return stream.getData().strip()
 
 
 if HAS_NAMEDFILE:

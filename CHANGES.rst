@@ -5,8 +5,8 @@ Changelog
 2.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix a bug in the RichText field indexer on Python 3.
+  [alecpm]
 
 2.4.0 (2020-01-24)
 ------------------
