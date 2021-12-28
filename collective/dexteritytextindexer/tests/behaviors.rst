@@ -154,6 +154,30 @@ Do rich-text fields work?
     ['in', 'for', 'an', 'inch', 'in', 'for', 'a', 'pound']
 
 
+Values are not duplicated in SearchableText when field comes from real interface
+
+    >>> from collective.dexteritytextindexer.tests.behaviors import ISimpleBehavior
+    >>> fti = DexterityFTI('SimpleFTI2')
+    >>> fti.behaviors = (
+    ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
+    ...     'collective.dexteritytextindexer.tests.behaviors.ISimpleBehavior',
+    ... )
+    >>> fti.model_source = '<model xmlns="http://namespaces.plone.org/supermodel/schema" xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone"><schema based-on="collective.dexteritytextindexer.tests.test_behaviors.ITestingSchema"></schema></model>'
+    >>> portal.portal_types._setObject('SimpleFTI2', fti)
+    'SimpleFTI2'
+    >>> schema = fti.lookupSchema()
+
+    >>> obj1 = createContentInContainer(portal, 'SimpleFTI2',
+    ...                                 checkContstraints=False,
+    ...                                 foo='foox',
+    ...                                 bar='barx',
+    ...                                 testing_field='bla')
+    >>> obj1
+    <Item at /plone/simplefti2>
+    >>> getSearchableText(obj1)
+    ['bla', 'foox']
+
+
 Do empty rich-text fields work?
 
     >>> from collective.dexteritytextindexer.tests.behaviors import IEmptyRichTextBehavior
@@ -243,19 +267,17 @@ When a schema marks a field as searchable which does not exist it should:
     ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
     ...     'collective.dexteritytextindexer.tests.behaviors.IMissingFieldBehavior',
     ... )
-    >>> fti.model_source = '<model xmlns="http://namespaces.plone.org/supermodel/schema" xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone"><schema based-on="collective.dexteritytextindexer.tests.test_behaviors.ITestingSchema"></schema></model>'
     >>> portal.portal_types._setObject('MissingFieldFTI', fti)
     'MissingFieldFTI'
     >>> schema = fti.lookupSchema()
 
     >>> obj = createContentInContainer(portal, 'MissingFieldFTI',
     ...                                checkContstraints=False,
-    ...                                foo='foo value',
-    ...                                testing_field='bla')
+    ...                                foo='foo value')
     >>> obj
     <Item at /plone/missingfieldfti>
     >>> getSearchableText(obj)
-    ['bla', 'foo', 'value']
+    ['foo', 'value']
 
     >>> 'IMissingFieldBehavior has no field "bar"' in layer['read_log']()
     True
