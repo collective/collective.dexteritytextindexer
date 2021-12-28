@@ -243,17 +243,19 @@ When a schema marks a field as searchable which does not exist it should:
     ...     'collective.dexteritytextindexer.behavior.IDexterityTextIndexer',
     ...     'collective.dexteritytextindexer.tests.behaviors.IMissingFieldBehavior',
     ... )
+    >>> fti.model_source = '<model xmlns:security="http://namespaces.plone.org/supermodel/security" xmlns:marshal="http://namespaces.plone.org/supermodel/marshal" xmlns:form="http://namespaces.plone.org/supermodel/form" xmlns="http://namespaces.plone.org/supermodel/schema" xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="PloneMeeting"><schema based-on="collective.dexteritytextindexer.tests.test_behaviors.ITestingSchema"></schema></model>'
     >>> portal.portal_types._setObject('MissingFieldFTI', fti)
     'MissingFieldFTI'
     >>> schema = fti.lookupSchema()
 
     >>> obj = createContentInContainer(portal, 'MissingFieldFTI',
     ...                                checkContstraints=False,
-    ...                                foo='foo value')
+    ...                                foo='foo value',
+    ...                                testing_field='bla')
     >>> obj
     <Item at /plone/missingfieldfti>
     >>> getSearchableText(obj)
-    ['foo', 'value']
+    ['bla', 'foo', 'value']
 
     >>> 'IMissingFieldBehavior has no field "bar"' in layer['read_log']()
     True

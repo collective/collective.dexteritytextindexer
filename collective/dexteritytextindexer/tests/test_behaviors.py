@@ -3,7 +3,10 @@
 """
 
 from collective.dexteritytextindexer import testing
+from collective.dexteritytextindexer.directives import searchable
+from plone.supermodel import model
 from plone.testing import layered
+from zope import schema
 
 import doctest
 import unittest as unittest
@@ -18,3 +21,9 @@ def test_suite():
                 layer=testing.TEXT_INTEXER_INTEGRATION_TESTING),
     ])
     return suite
+
+
+class ITestingSchema(model.Schema):
+
+    searchable("testing_field")
+    testing_field = schema.TextLine(title='Testing field')

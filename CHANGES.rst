@@ -5,7 +5,8 @@ Changelog
 2.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed duplicated values in SearchableText.
+  [gbastien]
 
 
 2.4.0 (2020-01-24)
