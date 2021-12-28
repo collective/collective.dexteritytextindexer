@@ -162,7 +162,7 @@ def get_searchable_contexts_and_fields(obj):
                 dottedname = '.'.join((schemata.__module__, schemata.__name__))
                 logging.error('%s has no field "%s"', dottedname, name)
 
-            else:
+            elif field not in fields:
                 fields.append(field)
 
         if fields:
